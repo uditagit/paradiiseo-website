@@ -8,16 +8,17 @@
   <style>
     :root {
       --primary: #7248b5;
-      --light: #f9f7ff;
-      --dark: #1a1a1a;
+      --secondary: #ffffff;
+      --dark: #0d0d0d;
+      --glass-bg: rgba(255, 255, 255, 0.1);
       --transition: all 0.4s ease;
     }
 
     body {
       margin: 0;
       font-family: 'Space Grotesk', sans-serif;
-      background: var(--light);
-      color: var(--dark);
+      background: var(--primary);
+      color: var(--secondary);
       line-height: 1.6;
       overflow-x: hidden;
     }
@@ -25,14 +26,15 @@
     h1, h2, h3 {
       font-weight: 700;
       margin-bottom: 1rem;
+      letter-spacing: -1px;
     }
 
     h1 {
-      font-size: 3rem;
+      font-size: 3.5rem;
     }
 
     h2 {
-      font-size: 2rem;
+      font-size: 2.2rem;
     }
 
     section {
@@ -41,23 +43,12 @@
     }
 
     .hero {
-      background: var(--primary);
-      color: white;
       text-align: center;
       padding: 7rem 10% 6rem;
     }
 
     .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
       animation: fadeInDown 1s ease forwards;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto 2rem;
-      animation: fadeInUp 1.2s ease forwards;
     }
 
     .btn {
@@ -66,110 +57,139 @@
       background: white;
       color: var(--primary);
       font-weight: bold;
-      border-radius: 8px;
+      border-radius: 50px;
       text-decoration: none;
       transition: var(--transition);
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
     }
 
     .btn:hover {
       background: var(--dark);
       color: white;
+      box-shadow: 0 0 20px rgba(255,255,255,0.4);
     }
 
-    .content-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .image-placeholder {
-      background: rgba(255, 255, 255, 0.2);
-      border: 2px dashed white;
-      height: 300px;
-      border-radius: 15px;
-    }
-
-    .problems, .solution, .payoff, .safety, .cta {
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
-      margin-bottom: 3rem;
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
       transition: var(--transition);
     }
 
-    .problems:hover, .solution:hover, .payoff:hover, .safety:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+    .glass-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
     }
 
     /* Calculator */
     .calculator {
-      background: var(--primary);
-      color: white;
-      padding: 2rem;
-      border-radius: 16px;
-      text-align: center;
       margin-top: 2rem;
+      text-align: center;
     }
 
-    .calculator input {
-      padding: 0.7rem;
-      margin: 0.5rem;
-      border-radius: 8px;
+    .calc-input {
+      margin: 1rem 0;
+    }
+
+    .calc-input label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .calc-input input[type=number] {
+      padding: 0.8rem;
+      border-radius: 10px;
       border: none;
-      outline: none;
+      width: 200px;
+      text-align: center;
+      background: rgba(255,255,255,0.15);
+      color: white;
       font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .calc-input input[type=number]:focus {
+      outline: none;
+      box-shadow: 0 0 15px rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.25);
+    }
+
+    .calc-input input[type=range] {
+      width: 70%;
+      margin-top: 0.5rem;
+      -webkit-appearance: none;
+      height: 6px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 10px;
+      outline: none;
+      transition: background 0.3s;
+    }
+
+    .calc-input input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: white;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .calc-input input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+      background: black;
     }
 
     .calculator button {
-      margin-top: 1rem;
-      padding: 0.9rem 1.5rem;
+      margin-top: 1.5rem;
+      padding: 1rem 2rem;
       background: white;
       color: var(--primary);
       border: none;
-      border-radius: 8px;
+      border-radius: 50px;
       font-weight: bold;
       cursor: pointer;
       transition: var(--transition);
     }
 
     .calculator button:hover {
-      background: var(--dark);
+      background: black;
       color: white;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
     }
 
     .result {
-      margin-top: 1.5rem;
-      font-size: 1.2rem;
+      margin-top: 2rem;
+      font-size: 1.3rem;
       font-weight: 600;
-      animation: fadeIn 0.6s ease forwards;
+      background: rgba(0,0,0,0.4);
+      padding: 1.5rem;
+      border-radius: 15px;
+      animation: fadeIn 0.8s ease forwards;
     }
 
     /* Keyframes */
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
     @keyframes fadeInDown {
       from {opacity: 0; transform: translateY(-30px);}
       to {opacity: 1; transform: translateY(0);}
     }
 
-    @keyframes fadeInUp {
-      from {opacity: 0; transform: translateY(30px);}
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
       to {opacity: 1; transform: translateY(0);}
     }
 
     footer {
-      background: var(--primary);
+      background: black;
       color: white;
       text-align: center;
       padding: 2rem;
       font-size: 0.9rem;
     }
-
   </style>
 </head>
 <body>
@@ -179,52 +199,49 @@
     <h1>Revolutionizing Creator Experiences</h1>
     <p>Tired of the subscription hamster wheel? It’s time to reclaim your creativity with Paradisio.</p>
     <a href="#signup" class="btn">Creator Pre-Sign Up</a>
-    <div class="image-placeholder" style="margin-top:2rem;"></div>
   </section>
 
-  <!-- PROBLEM -->
-  <section class="problems">
-    <h2>The Creator Economy is Broken</h2>
-    <p>You’re leaving money and true connection on the table. Endless grind, shallow exclusivity, messy collabs—sound familiar?</p>
-    <div class="image-placeholder"></div>
-  </section>
+  <!-- PAYOFF + FUTURISTIC CALCULATOR -->
+  <section>
+    <div class="glass-card">
+      <h2>Income Disparity Calculator</h2>
+      <p>Compare your grind earnings with potential Paradisio events.</p>
 
-  <!-- SOLUTION -->
-  <section class="solution">
-    <h2>This is Paradisio</h2>
-    <p>A platform where you design, host, and monetize experiences—from retreats to workshops—while we handle the messy parts.</p>
-    <div class="image-placeholder"></div>
-  </section>
+      <div class="calculator">
+        <div class="calc-input">
+          <label for="monthlyIncome">Monthly Subscription Income ($): 
+            <span id="monthlyVal">1000</span>
+          </label>
+          <input type="range" id="monthlyIncome" min="100" max="10000" step="100" value="1000" oninput="updateLabel('monthlyIncome','monthlyVal')">
+        </div>
 
-  <!-- PAYOFF + CALCULATOR -->
-  <section class="payoff">
-    <h2>One Retreat vs. One Year of Shoutouts</h2>
-    <p>See how much more you could earn with Paradisio.</p>
-    <div class="calculator">
-      <h3>Income Disparity Calculator</h3>
-      <p>Enter your current monthly earnings to compare.</p>
-      <input type="number" id="monthlyIncome" placeholder="Monthly income ($)">
-      <input type="number" id="eventPrice" placeholder="Ticket price per fan ($)" value="3000">
-      <input type="number" id="fanCount" placeholder="Fans per event" value="10">
-      <br>
-      <button onclick="calculate()">Calculate</button>
-      <div id="calcResult" class="result"></div>
+        <div class="calc-input">
+          <label for="eventPrice">Ticket Price per Fan ($): 
+            <span id="priceVal">3000</span>
+          </label>
+          <input type="range" id="eventPrice" min="100" max="10000" step="100" value="3000" oninput="updateLabel('eventPrice','priceVal')">
+        </div>
+
+        <div class="calc-input">
+          <label for="fanCount">Fans per Event: 
+            <span id="fanVal">10</span>
+          </label>
+          <input type="range" id="fanCount" min="5" max="100" step="1" value="10" oninput="updateLabel('fanCount','fanVal')">
+        </div>
+
+        <button onclick="calculate()">Calculate</button>
+        <div id="calcResult" class="result"></div>
+      </div>
     </div>
   </section>
 
-  <!-- SAFETY -->
-  <section class="safety">
-    <h2>Build Your Empire, On Your Terms</h2>
-    <p>Verified fans, built-in refunds, your permanent hub. Free yourself from algorithm anxiety.</p>
-    <div class="image-placeholder"></div>
-  </section>
-
   <!-- CTA -->
-  <section class="cta" id="signup">
+  <section id="signup" class="glass-card" style="text-align:center; margin:3rem 10%;">
     <h2>Be the Host, Not the Content Machine</h2>
     <p>Ready to host your first experience? Join the waitlist for early access.</p>
     <form>
-      <input type="email" placeholder="Your email" required style="padding:0.9rem; border-radius:8px; border:none; margin-right:0.5rem;">
+      <input type="email" placeholder="Your email" required 
+             style="padding:0.9rem; border-radius:50px; border:none; margin-right:0.5rem; width:220px;">
       <button type="submit" class="btn">Join Waitlist</button>
     </form>
   </section>
@@ -234,29 +251,26 @@
   </footer>
 
   <script>
+    function updateLabel(inputId, labelId) {
+      document.getElementById(labelId).innerText = document.getElementById(inputId).value;
+    }
+
     function calculate() {
       const monthly = parseFloat(document.getElementById("monthlyIncome").value);
       const ticketPrice = parseFloat(document.getElementById("eventPrice").value);
       const fans = parseFloat(document.getElementById("fanCount").value);
 
-      if(isNaN(monthly) || isNaN(ticketPrice) || isNaN(fans)) {
-        document.getElementById("calcResult").innerText = "Please enter valid numbers.";
-        return;
-      }
-
       const yearlySub = monthly * 12;
       const eventEarnings = ticketPrice * fans;
-      const disparity = eventEarnings - monthly;
 
       document.getElementById("calcResult").innerHTML = `
-        <p>👉 Your yearly subscription grind: <strong>$${yearlySub.toLocaleString()}</strong></p>
-        <p>👉 One Paradisio event could earn: <strong>$${eventEarnings.toLocaleString()}</strong></p>
+        <p>💸 Yearly subscription grind: <strong>$${yearlySub.toLocaleString()}</strong></p>
+        <p>🚀 One Paradisio event could earn: <strong>$${eventEarnings.toLocaleString()}</strong></p>
         <p>${eventEarnings > yearlySub 
-          ? "🚀 Paradisio events can surpass your yearly grind in just one retreat!" 
-          : "🌱 Paradisio events complement your income beautifully."}</p>
+          ? "One event can surpass your yearly grind." 
+          : "Even a single event adds massive value alongside your current income."}</p>
       `;
     }
   </script>
-
 </body>
 </html>
