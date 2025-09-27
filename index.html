@@ -1,376 +1,501 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Paradiiseo — Revolutionizing Creator Experiences</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --purple:#7248b5;
-    --purple-900:#5e3aa5;
-    --purple-950:#472c82;
-    --ink:#0a0a0a;
-    --white:#fff;
-    --glass:rgba(255,255,255,.12);
-    --glass-strong:rgba(255,255,255,.18);
-    --stroke:rgba(255,255,255,.35);
-    --ease:.35s cubic-bezier(.2,.8,.2,1);
-  }
-
-  /* RESET / BASE */
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0; overflow-x:hidden;
-    font-family:'Space Grotesk', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    background:
-      radial-gradient(70rem 70rem at 85% -10%, rgba(255,255,255,.14) 0%, transparent 60%),
-      radial-gradient(45rem 45rem at -10% 110%, rgba(255,255,255,.10) 0%, transparent 60%),
-      linear-gradient(180deg, var(--purple) 0%, var(--purple-900) 60%, var(--purple-950) 100%);
-    color:var(--white);
-    line-height:1.65;
-  }
-  .wrap{width:min(1180px,92%); margin-inline:auto}
-  section{padding:clamp(3rem,6vw,6rem) 0; position:relative}
-
-  /* TYPOGRAPHY (fluid + punchy) */
-  h1,h2,h3{letter-spacing:-.02em; margin:0 0 1rem}
-  h1{font-size:clamp(2.4rem,6vw,4.2rem); font-weight:800}
-  h2{font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:800}
-  h3{font-size:clamp(1.2rem,2.2vw,1.5rem); font-weight:700}
-  p{margin:.6rem 0; opacity:.94; font-size:clamp(1rem,1.2vw,1.125rem)}
-
-  /* GLASS TITLES */
-  .glass-title{
-    display:inline-block;
-    padding:.65rem 1rem .55rem 1rem;
-    border-radius:18px;
-    background:var(--glass);
-    border:1px solid var(--stroke);
-    backdrop-filter:blur(14px);
-    box-shadow:0 10px 30px rgba(0,0,0,.25) inset, 0 10px 26px rgba(0,0,0,.18);
-    text-shadow:0 1px 0 rgba(0,0,0,.35);
-  }
-
-  /* CARDS */
-  .card{
-    background:var(--glass);
-    border:1px solid var(--stroke);
-    border-radius:22px;
-    backdrop-filter:blur(16px);
-    padding:clamp(1.25rem,2.8vw,2rem);
-    box-shadow:0 16px 50px rgba(0,0,0,.35);
-    transition:transform var(--ease), box-shadow var(--ease), background var(--ease), border-color var(--ease);
-  }
-  .card:hover{transform:translateY(-6px); box-shadow:0 24px 64px rgba(0,0,0,.5); background:var(--glass-strong)}
-
-  /* GRID */
-  .grid{display:grid; gap:clamp(1rem,2.2vw,1.6rem); grid-template-columns:repeat(12,1fr)}
-  .col-6{grid-column:span 6} .col-5{grid-column:span 5} .col-7{grid-column:span 7} .col-12{grid-column:span 12}
-  @media (max-width:900px){ .col-6,.col-5,.col-7{grid-column:span 12} }
-
-  /* IMAGE PLACEHOLDERS */
-  .img-hole{height:260px; border:1px dashed rgba(255,255,255,.55); border-radius:16px; display:grid; place-items:center; color:rgba(255,255,255,.7); font-weight:700; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0))}
-
-  /* BUTTONS */
-  .btn{
-    --bg:rgba(255,255,255,.14);
-    display:inline-flex; align-items:center; gap:.6rem;
-    padding:1rem 1.4rem; border-radius:999px;
-    background:var(--bg); color:#fff; text-decoration:none; font-weight:800; letter-spacing:.01em;
-    border:1px solid var(--stroke); position:relative; overflow:hidden;
-    transition:transform var(--ease), box-shadow var(--ease), background var(--ease), color var(--ease);
-    backdrop-filter:blur(10px);
-    box-shadow:0 10px 26px rgba(0,0,0,.25);
-  }
-  .btn::after{
-    content:""; position:absolute; inset:0;
-    background:radial-gradient(180px 80px at var(--x,50%) var(--y,50%), rgba(255,255,255,.25), transparent 40%);
-    opacity:0; transition:opacity .25s ease;
-  }
-  .btn:hover{transform:translateY(-3px); box-shadow:0 18px 42px rgba(0,0,0,.45); background:rgba(0,0,0,.35)}
-  .btn:hover::after{opacity:1}
-  .btn.dark{background:#000; border-color:#000}
-
-  /* HERO */
-  .hero .lede{max-width:880px}
-
-  /* SCROLL REVEALS */
-  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s var(--ease), transform .7s var(--ease)}
-  .reveal.on{opacity:1; transform:none}
-
-  /* CALCULATOR */
-  .calc{position:relative; overflow:hidden}
-  .calc::before{
-    content:""; position:absolute; inset:-20%;
-    background: radial-gradient(32rem 32rem at 120% -10%, rgba(255,255,255,.14) 0%, transparent 60%),
-                radial-gradient(28rem 28rem at -10% 120%, rgba(0,0,0,.18) 0%, transparent 60%);
-    filter: blur(12px); pointer-events:none;
-  }
-  .pill{display:inline-block; padding:.45rem .8rem; border-radius:999px; background:rgba(255,255,255,.12); border:1px solid var(--stroke); font-weight:700; font-size:.95rem}
-
-  .controls{display:grid; gap:1rem; grid-template-columns:repeat(12,1fr)}
-  .control{grid-column:span 4; background:rgba(0,0,0,.28); border-radius:14px; padding:1rem; border:1px solid rgba(255,255,255,.18)}
-  @media (max-width:900px){ .control{grid-column:span 12} }
-  .control label{display:flex; justify-content:space-between; align-items:center; font-weight:800}
-  .val{min-width:80px; text-align:right; background:#000; color:#fff; border:1px solid var(--stroke); border-radius:10px; padding:.32rem .6rem}
-  .row{display:flex; gap:.75rem; align-items:center; margin-top:.75rem}
-  .num{width:140px; padding:.8rem .8rem; border-radius:12px; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.1); color:#fff; font-weight:800; text-align:center; outline:none; transition:box-shadow var(--ease), background var(--ease), border-color var(--ease)}
-  .num:focus{box-shadow:0 0 0 6px rgba(255,255,255,.14); background:rgba(255,255,255,.18); border-color:rgba(255,255,255,.45)}
-  input[type=range]{width:100%; height:8px; border-radius:999px; background:rgba(255,255,255,.28); appearance:none; outline:none}
-  input[type=range]::-webkit-slider-thumb{appearance:none; width:18px; height:18px; border-radius:50%; background:#fff; border:2px solid #000; box-shadow:0 0 0 6px rgba(255,255,255,.18); transition:transform var(--ease), box-shadow var(--ease)}
-  input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.1); box-shadow:0 0 0 10px rgba(255,255,255,.24)}
-  input[type=range]::-moz-range-thumb{width:18px; height:18px; border-radius:50%; background:#fff}
-
-  .actions{display:flex; flex-wrap:wrap; gap:.8rem; margin-top:1rem}
-  .ghost{background:transparent; color:#fff; border:1px solid var(--stroke); border-radius:999px; padding:.95rem 1.2rem; font-weight:800; cursor:pointer; transition:all var(--ease)}
-  .ghost:hover{background:#000; border-color:#000}
-
-  .results{margin-top:1.2rem; display:grid; gap:1rem; grid-template-columns:repeat(12,1fr); align-items:end}
-  .result-card{grid-column:span 6; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.2); border-radius:14px; padding:1rem}
-  @media (max-width:900px){ .result-card{grid-column:span 12} }
-  .stat{display:flex; align-items:center; justify-content:space-between; font-weight:800}
-  .bar{height:12px; border-radius:10px; background:rgba(255,255,255,.22); overflow:hidden; margin-top:.6rem}
-  .bar > span{display:block; height:100%; width:0%; background:linear-gradient(90deg,#fff,#dedaff); transition:width .9s cubic-bezier(.2,.9,.2,1)}
-  .delta{margin-top:.6rem; font-weight:800; color:#00ffcc; text-shadow:0 0 14px rgba(0,255,204,.35)}
-  .muted{opacity:.9; margin-top:.35rem}
-
-  footer{padding:2.4rem 0; text-align:center; color:rgba(255,255,255,.9)}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paradiiseo - Stop Grinding. Start Hosting.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #2d1b69 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        .purple-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .purple-bg {
+            background-color: #2d1b69;
+        }
+        
+        .light-purple-bg {
+            background-color: #3d2a77;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .float-animation {
+            animation: float 5s ease-in-out infinite;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 300% 300%;
+            animation: gradient-shift 3s ease infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-glow {
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-glow:hover {
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        .role-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .role-card:hover {
+            border-color: #764ba2;
+            transform: scale(1.05);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-<body>
-
-  <!-- HERO / HOOK -->
-  <section class="hero">
-    <div class="wrap">
-      <h1 class="glass-title reveal">Revolutionizing Creator Experiences</h1>
-      <p class="lede reveal">Tired of the subscription hamster wheel? Parad­iiseo lets you design, host and monetize real-world experiences—while the Collab Engine handles roles, ops, and clean payouts.</p>
-      <div class="reveal" style="margin:1.2rem 0 0">
-        <a class="btn" href="#cta" id="ctaBtn">Creator Pre-Sign Up</a>
-      </div>
-      <div class="img-hole reveal" style="margin-top:1.2rem">Hero image space</div>
-    </div>
-  </section>
-
-  <!-- PROBLEM -->
-  <section>
-    <div class="wrap grid">
-      <div class="col-6 card reveal">
-        <h2 class="glass-title">The Grind Is Real</h2>
-        <p>Alina’s story mirrors countless creators: constant churn, platform anxiety, shallow connections. If that’s you, you’re not alone.</p>
-        <div class="img-hole">Hook visual</div>
-      </div>
-      <div class="col-6 card reveal">
-        <h2 class="glass-title">The Creator Economy Is Broken</h2>
-        <p>Market flooded. Endless grind. Shallow exclusivity. Leak nightmares. Messy collabs. Fragile funnels. You’re leaving money and true connection on the table.</p>
-        <div class="img-hole">Problem graphic</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SOLUTION -->
-  <section>
-    <div class="wrap card reveal">
-      <h2 class="glass-title">This Is Paradiiseo</h2>
-      <p>Reclaim your creativity. Design, host and monetize exclusive fan experiences—from luxury retreats to private workshops—without spreadsheets or chaos.</p>
-      <div class="img-hole">Solution animation / video</div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS / COLLAB ENGINE -->
-  <section>
-    <div class="wrap card reveal">
-      <h2 class="glass-title">The Collab Engine</h2>
-      <p><strong>No spreadsheets. No drama. Just clean money.</strong></p>
-      <p><strong>Roles:</strong> Host (you) control. Co-hosts & Headliners bring audiences. Crew get paid upfront. Participants (fans) buy tickets for real access.</p>
-      <div class="img-hole">Interactive flowchart placeholder</div>
-    </div>
-  </section>
-
-  <!-- PAYOFF + CALCULATOR -->
-  <section>
-    <div class="wrap card calc reveal">
-      <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;justify-content:space-between">
-        <h2 class="glass-title">One Retreat vs. One Year of Shoutouts</h2>
-        <span class="pill">Interactive • Transparent • Real numbers</span>
-      </div>
-
-      <div class="controls" style="margin-top:1rem">
-        <!-- Monthly subscription income -->
-        <div class="control">
-          <label for="monthly">Monthly subscriptions ($) <span class="val" id="v-monthly">2000</span></label>
-          <div class="row">
-            <input class="num" type="number" id="monthly" min="0" step="50" value="2000">
-            <input type="range" id="r-monthly" min="0" max="20000" step="50" value="2000">
-          </div>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="glass-effect fixed w-full z-50 py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 purple-gradient rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-xl">P</span>
+                </div>
+                <span class="text-xl font-bold gradient-text">PARADIISEO</span>
+            </div>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#problem" class="text-gray-300 hover:text-white transition">The Problem</a>
+                <a href="#solution" class="text-gray-300 hover:text-white transition">The Solution</a>
+                <a href="#collaboration" class="text-gray-300 hover:text-white transition">Collaboration</a>
+                <a href="#waitlist" class="text-gray-300 hover:text-white transition">Join Waitlist</a>
+            </div>
+            
+            <div class="flex space-x-4">
+                <button class="px-6 py-2 purple-gradient text-white rounded-full btn-glow">Join Waitlist</button>
+            </div>
         </div>
-        <!-- Ticket price -->
-        <div class="control">
-          <label for="price">Ticket price per fan ($) <span class="val" id="v-price">2500</span></label>
-          <div class="row">
-            <input class="num" type="number" id="price" min="50" step="50" value="2500">
-            <input type="range" id="r-price" min="50" max="20000" step="50" value="2500">
-          </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center pt-20 pb-10 px-6">
+        <div class="container mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">Stop Grinding. <span class="gradient-text">Start Hosting.</span></h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                Turn your most dedicated fans into lifelong patrons with exclusive, real-world experiences. Paradiiseo gives you the tools to create premium events that earn more than months of subscription churn.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12">
+                <button class="px-8 py-3 purple-gradient text-white rounded-full text-lg font-semibold btn-glow">
+                    Join the Waitlist for Early Access
+                </button>
+                <button class="px-8 py-3 glass-effect text-white rounded-full text-lg font-semibold border border-gray-600">
+                    Watch How It Works (2 min)
+                </button>
+            </div>
+            <div class="relative max-w-4xl mx-auto">
+                <div class="glass-effect rounded-2xl p-1 float-animation">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                         alt="Creator hosting an exclusive experience" 
+                         class="rounded-2xl w-full h-auto">
+                </div>
+            </div>
         </div>
-        <!-- Fans per event -->
-        <div class="control">
-          <label for="fans">Fans per event <span class="val" id="v-fans">12</span></label>
-          <div class="row">
-            <input class="num" type="number" id="fans" min="1" step="1" value="12">
-            <input type="range" id="r-fans" min="1" max="200" step="1" value="12">
-          </div>
+    </section>
+
+    <!-- The Problem Section -->
+    <section id="problem" class="py-20 px-6 purple-bg">
+        <div class="container mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">The Creator Economy is Broken. <span class="gradient-text">You Feel It Every Day.</span></h2>
+            <p class="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto">
+                You're stuck creating endless content just to maintain relevance. Your time is spent managing leaks, chasing brand deals, and worrying about platform algorithms.
+            </p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="glass-effect rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-sync-alt text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">The Endless Grind</h3>
+                    <p class="text-gray-300">Non-stop content creation just to stay relevant</p>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Shallow Exclusivity</h3>
+                    <p class="text-gray-300">"Exclusive" content that thousands can access</p>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-exclamation-triangle text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Leak Nightmare</h3>
+                    <p class="text-gray-300">Constant rebranding and lost identity</p>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-table text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Messy Collaborations</h3>
+                    <p class="text-gray-300">Spreadsheet drama and payment arguments</p>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-ban text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Platform Anxiety</h3>
+                    <p class="text-gray-300">One algorithm change away from losing everything</p>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-chart-line text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Revenue Ceiling</h3>
+                    <p class="text-gray-300">Stuck selling access for pocket change</p>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="actions">
-        <button class="ghost" id="preset-lean">Preset: Lean (10 × $2000)</button>
-        <button class="ghost" id="preset-premium">Preset: Premium (15 × $3000)</button>
-        <a class="btn dark" href="#calc" id="calcBtn">Calculate</a>
-      </div>
-
-      <div class="results">
-        <div class="result-card">
-          <div class="stat">
-            <span>Yearly subscription grind</span>
-            <span id="yearlySub">$24,000</span>
-          </div>
-          <div class="bar"><span id="barSub" style="width:0%"></span></div>
+    <!-- Creator Story Section -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <div class="glass-effect rounded-2xl p-8 md:p-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 gradient-text">"I was creating content 24/7 but my fans wanted something real."</h2>
+                <p class="text-lg text-gray-300 mb-6 text-center">
+                    "Hi, I'm Alina. By day I create content for my subscribers. By night, I answer DMs from fans offering hundreds for a coffee, a dinner, a real connection. They don't want another clip in their inbox - they want to be part of my story. Paradiiseo helped me turn those DMs into $30,000 retreats where I control exactly who attends and how the experience unfolds."
+                </p>
+                <div class="text-center">
+                    <span class="text-purple-300 font-semibold">Alina, 26 - Miami</span>
+                </div>
+            </div>
         </div>
-        <div class="result-card">
-          <div class="stat">
-            <span>One Paradiiseo event potential</span>
-            <span id="eventEarn">$30,000</span>
-          </div>
-          <div class="bar"><span id="barEvt" style="width:0%"></span></div>
-          <div class="delta" id="deltaText">+ $6,000 vs. a whole year</div>
-          <p class="muted" id="eventsNeeded">≈ 1 event needed to match your yearly subscriptions.</p>
+    </section>
+
+    <!-- The Solution Section -->
+    <section id="solution" class="py-20 px-6 light-purple-bg">
+        <div class="container mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">Host Premium Experiences. <span class="gradient-text">Make Fans Part of Your Story.</span></h2>
+            <p class="text-xl text-gray-400 text-center mb-8 max-w-3xl mx-auto">
+                Paradiiseo is the first platform built for creators to design, host, and monetize real-world experiences.
+            </p>
+            
+            <div class="glass-effect rounded-2xl p-8 max-w-4xl mx-auto mt-12">
+                <h3 class="text-2xl font-bold mb-4 text-center gradient-text">You Control Who Attends</h3>
+                <p class="text-gray-300 text-center mb-6">
+                    Vet every participant, set your standards, and ensure the experience matches your vision. No more random audiences - only the fans who truly appreciate your work.
+                </p>
+                <div class="grid md:grid-cols-2 gap-6 mt-8">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 purple-gradient rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-check text-white text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Application Review</h4>
+                            <p class="text-gray-400 text-sm">Vet every potential attendee before they can purchase</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 purple-gradient rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-check text-white text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Custom Criteria</h4>
+                            <p class="text-gray-400 text-sm">Set requirements that match your brand values</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 purple-gradient rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-check text-white text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Final Approval Power</h4>
+                            <p class="text-gray-400 text-sm">No one joins without your explicit approval</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 purple-gradient rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-check text-white text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Conduct Standards</h4>
+                            <p class="text-gray-400 text-sm">Enforce rules that ensure everyone's comfort and safety</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- SAFETY NET -->
-  <section>
-    <div class="wrap grid">
-      <div class="col-6 card reveal">
-        <h2 class="glass-title">Build Your Empire, On Your Terms</h2>
-        <p>Verified fans. Built-in refunds. Your permanent hub. Independence from social algorithms.</p>
-        <div class="img-hole">Safety feature visual</div>
-      </div>
-      <div class="col-6 card reveal">
-        <h2 class="glass-title">Own Your Brand</h2>
-        <p>Keep your identity and pricing power. Paradiiseo is your backstage, not another feed.</p>
-        <div class="img-hole">Branding visual</div>
-      </div>
-    </div>
-  </section>
+    <!-- Collaboration Engine Section -->
+    <section id="collaboration" class="py-20 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">The End of <span class="gradient-text">Spreadsheet Drama</span></h2>
+            <p class="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto">
+                Our system understands how creative collaborations actually work. Bring together the perfect team and let Paradiiseo handle the clean money splits automatically.
+            </p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+                <div class="role-card glass-effect rounded-2xl p-6 text-center">
+                    <div class="w-20 h-20 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-crown text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">HOST</h3>
+                    <p class="text-gray-300 text-sm">You set the vision, rules, and have final approval on everything</p>
+                </div>
+                
+                <div class="role-card glass-effect rounded-2xl p-6 text-center">
+                    <div class="w-20 h-20 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-handshake text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">CO-HOST</h3>
+                    <p class="text-gray-300 text-sm">Your trusted partner in managing the experience</p>
+                </div>
+                
+                <div class="role-card glass-effect rounded-2xl p-6 text-center">
+                    <div class="w-20 h-20 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-star text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">HEADLINERS</h3>
+                    <p class="text-gray-300 text-sm">Featured creators who bring their audience to your event</p>
+                </div>
+                
+                <div class="role-card glass-effect rounded-2xl p-6 text-center">
+                    <div class="w-20 h-20 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-video text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">CREW</h3>
+                    <p class="text-gray-300 text-sm">Professionals paid automatically from ticket sales</p>
+                </div>
+                
+                <div class="role-card glass-effect rounded-2xl p-6 text-center">
+                    <div class="w-20 h-20 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">PARTICIPANTS</h3>
+                    <p class="text-gray-300 text-sm">Your vetted superfans who become part of your story</p>
+                </div>
+            </div>
+            
+            <!-- Miami Retreat Example -->
+            <div class="glass-effect rounded-2xl p-8 max-w-4xl mx-auto mt-16">
+                <h3 class="text-2xl font-bold mb-6 text-center gradient-text">The Miami Retreat: How $30,000 Happens</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-semibold mb-4">Revenue Split Example:</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span>HOST (You)</span>
+                                <span class="font-bold gradient-text">40% - $12,000</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>HEADLINER</span>
+                                <span class="font-bold">25% - $7,500</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>CO-HOST</span>
+                                <span class="font-bold">15% - $4,500</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>CREW</span>
+                                <span class="font-bold">10% - $3,000</span>
+                            </div>
+                            <div class="flex justify-between items-center border-t border-gray-600 pt-3">
+                                <span class="font-semibold">TOTAL (10 participants × $3,000)</span>
+                                <span class="font-bold gradient-text">$30,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-4">What You Get:</h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i> $12,000 for one weekend</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i> Viral content in exotic locations</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i> Expanded reach to new audiences</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i> No payment chasing - automatic splits</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i> Complete control over the experience</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- CTA -->
-  <section id="cta">
-    <div class="wrap card reveal" style="text-align:center">
-      <h2 class="glass-title">Be the Host, Not the Content Machine</h2>
-      <p>Ready to host your first experience? Join the waitlist for early access.</p>
-      <form onsubmit="event.preventDefault(); this.reset(); alert('Welcome — you’re on the list!');" style="display:flex; gap:.7rem; justify-content:center; flex-wrap:wrap; margin-top:1rem">
-        <input type="email" required placeholder="Your email"
-               style="padding:1rem 1.1rem; border-radius:999px; border:1px solid var(--stroke); background:rgba(255,255,255,.1); color:#fff; width:min(340px,82vw); outline:none">
-        <button class="btn" type="submit">Join Waitlist</button>
-      </form>
-    </div>
-  </section>
+    <!-- Final CTA Section -->
+    <section id="waitlist" class="py-20 px-6 purple-gradient">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Ready to Host Your First Experience?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">
+                Join creators who are designing their exit from the subscription grind. Be the first to access Paradiiseo when we launch.
+            </p>
+            
+            <div class="max-w-md mx-auto">
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-full text-gray-900">
+                    <button class="px-8 py-3 bg-white text-purple-600 rounded-full font-semibold btn-glow whitespace-nowrap">
+                        Join Waitlist
+                    </button>
+                </div>
+                <p class="text-sm mt-4 opacity-75">Join 5,000+ creators on the waitlist</p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-12">
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-earlybirds text-white"></i>
+                    </div>
+                    <p class="font-semibold">Early Access</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-eye text-white"></i>
+                    </div>
+                    <p class="font-semibold">First Look</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-headset text-white"></i>
+                    </div>
+                    <p class="font-semibold">Onboarding Support</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-star text-white"></i>
+                    </div>
+                    <p class="font-semibold">Priority Access</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <footer>© 2025 Paradiiseo. All rights reserved.</footer>
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-gray-900">
+        <div class="container mx-auto">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 purple-gradient rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold">P</span>
+                        </div>
+                        <span class="text-xl font-bold gradient-text">PARADIISEO</span>
+                    </div>
+                    <p class="text-gray-400">Where creators become hosts and fans become part of the story.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">For Creators</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Features</a></li>
+                        <li><a href="#" class="hover:text-white transition">Pricing</a></li>
+                        <li><a href="#" class="hover:text-white transition">Success Stories</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition">Safety & Trust</a></li>
+                        <li><a href="#" class="hover:text-white transition">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">About</a></li>
+                        <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Paradiiseo. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-<script>
-  /* ---------- Button ripple light-follow ---------- */
-  document.querySelectorAll('.btn').forEach(btn=>{
-    btn.addEventListener('pointermove', e=>{
-      const r = btn.getBoundingClientRect();
-      btn.style.setProperty('--x', (e.clientX - r.left)+'px');
-      btn.style.setProperty('--y', (e.clientY - r.top)+'px');
-    });
-  });
-
-  /* ---------- Scroll reveal animations ---------- */
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); }
-    });
-  }, {threshold:.15});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-  /* ---------- Calculator bindings ---------- */
-  const bind = (numId, rangeId, badgeId) => {
-    const num=document.getElementById(numId), rng=document.getElementById(rangeId), badge=document.getElementById(badgeId);
-    const sync=(from,to)=>()=>{ to.value=from.value; badge.textContent=Number(from.value).toLocaleString(); animate(); }
-    num.addEventListener('input', sync(num,rng)); rng.addEventListener('input', sync(rng,num));
-  };
-  bind('monthly','r-monthly','v-monthly');
-  bind('price','r-price','v-price');
-  bind('fans','r-fans','v-fans');
-
-  const subEl = document.getElementById('yearlySub');
-  const evtEl = document.getElementById('eventEarn');
-  const barSub = document.getElementById('barSub');
-  const barEvt = document.getElementById('barEvt');
-  const deltaText = document.getElementById('deltaText');
-  const eventsNeeded = document.getElementById('eventsNeeded');
-
-  function calcValues(){
-    const monthly = +document.getElementById('monthly').value || 0;
-    const price   = +document.getElementById('price').value || 0;
-    const fans    = +document.getElementById('fans').value || 0;
-    return { yearlySub: monthly*12, oneEvent: price*fans };
-  }
-
-  function animate(){
-    const {yearlySub, oneEvent} = calcValues();
-    subEl.textContent = '$'+yearlySub.toLocaleString();
-    evtEl.textContent = '$'+oneEvent.toLocaleString();
-
-    const maxVal=Math.max(yearlySub, oneEvent, 1);
-    const subPct=Math.min(100,(yearlySub/maxVal)*100);
-    const evtPct=Math.min(100,(oneEvent/maxVal)*100);
-
-    requestAnimationFrame(()=>{
-      barSub.style.width=subPct+'%';
-      barEvt.style.width=evtPct+'%';
-    });
-
-    const delta = oneEvent - yearlySub;
-    const sign = delta>=0?'+':'–';
-    deltaText.textContent = `${sign} $${Math.abs(delta).toLocaleString()} vs. a whole year`;
-
-    if(oneEvent>0){
-      const need = Math.ceil((yearlySub||0)/oneEvent || 0);
-      eventsNeeded.textContent = yearlySub===0
-        ? `Even one event beats $0 yearly subscription income.`
-        : `≈ ${need} event${need>1?'s':''} needed to match your yearly subscriptions.`;
-    }else{
-      eventsNeeded.textContent = '';
-    }
-  }
-
-  document.getElementById('calcBtn').addEventListener('click', e=>{
-    e.preventDefault(); animate();
-    document.getElementById('calcBtn').classList.add('pulse');
-    setTimeout(()=>document.getElementById('calcBtn').classList.remove('pulse'),400);
-  });
-
-  document.getElementById('preset-lean').addEventListener('click', ()=>{
-    setVal('price','r-price','v-price',2000);
-    setVal('fans','r-fans','v-fans',10);
-    animate();
-  });
-  document.getElementById('preset-premium').addEventListener('click', ()=>{
-    setVal('price','r-price','v-price',3000);
-    setVal('fans','r-fans','v-fans',15);
-    animate();
-  });
-  function setVal(nId,rId,bId,val){ document.getElementById(nId).value=val; document.getElementById(rId).value=val; document.getElementById(bId).textContent=val.toLocaleString(); }
-
-  // Initial paint
-  animate();
-</script>
+    <script>
+        // Scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(el => fadeObserver.observe(el));
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
