@@ -1,379 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paradiiseo - Stop Grinding. Start Hosting.</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Custom Styles */
-        .summer-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 20%, #f093fb 40%, #f5576c 60%, #ffd89b 80%, #ffd89b 100%);
-        }
-        
-        .purple-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        
-        .summer-text {
-            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb, #f5576c);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            background-size: 300% 300%;
-            animation: gradient-shift 6s ease infinite;
-        }
-        
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .float-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-10px) rotate(1deg); }
-            66% { transform: translateY(-5px) rotate(-1deg); }
-        }
-        
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .photo-gallery {
-            display: grid;
-            gap: 1rem;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        }
-        
-        .photo-card {
-            position: relative;
-            overflow: hidden;
-            border-radius: 16px;
-            transition: all 0.4s ease;
-        }
-        
-        .photo-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-        
-        .photo-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-        
-        .photo-card:hover img {
-            transform: scale(1.1);
-        }
-        
-        .summer-wave {
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: wave 3s ease-in-out infinite;
-        }
-        
-        @keyframes wave {
-            0%, 100% { transform: translateX(-100%); }
-            50% { transform: translateX(100%); }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paradisio – Revolutionizing Creator Experiences</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7248b5;
+      --light: #f9f7ff;
+      --dark: #1a1a1a;
+      --transition: all 0.4s ease;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    section {
+      padding: 5rem 10%;
+      position: relative;
+    }
+
+    .hero {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 7rem 10% 6rem;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      animation: fadeInDown 1s ease forwards;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      animation: fadeInUp 1.2s ease forwards;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      background: white;
+      color: var(--primary);
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .btn:hover {
+      background: var(--dark);
+      color: white;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .image-placeholder {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px dashed white;
+      height: 300px;
+      border-radius: 15px;
+    }
+
+    .problems, .solution, .payoff, .safety, .cta {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+      margin-bottom: 3rem;
+      transition: var(--transition);
+    }
+
+    .problems:hover, .solution:hover, .payoff:hover, .safety:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+    }
+
+    /* Calculator */
+    .calculator {
+      background: var(--primary);
+      color: white;
+      padding: 2rem;
+      border-radius: 16px;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .calculator input {
+      padding: 0.7rem;
+      margin: 0.5rem;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    .calculator button {
+      margin-top: 1rem;
+      padding: 0.9rem 1.5rem;
+      background: white;
+      color: var(--primary);
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .calculator button:hover {
+      background: var(--dark);
+      color: white;
+    }
+
+    .result {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    /* Keyframes */
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes fadeInDown {
+      from {opacity: 0; transform: translateY(-30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes fadeInUp {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+
+  </style>
 </head>
-<body class="font-['Inter'] bg-white text-gray-800">
-    <!-- Animated Background Elements -->
-    <div class="fixed inset-0 -z-10 opacity-5">
-        <div class="absolute top-20 left-10 w-20 h-20 summer-gradient rounded-full float-animation" style="animation-delay: 0s;"></div>
-        <div class="absolute top-40 right-20 w-16 h-16 summer-gradient rounded-full float-animation" style="animation-delay: 1s;"></div>
-        <div class="absolute bottom-20 left-1/4 w-24 h-24 summer-gradient rounded-full float-animation" style="animation-delay: 2s;"></div>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Revolutionizing Creator Experiences</h1>
+    <p>Tired of the subscription hamster wheel? It’s time to reclaim your creativity with Paradisio.</p>
+    <a href="#signup" class="btn">Creator Pre-Sign Up</a>
+    <div class="image-placeholder" style="margin-top:2rem;"></div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="problems">
+    <h2>The Creator Economy is Broken</h2>
+    <p>You’re leaving money and true connection on the table. Endless grind, shallow exclusivity, messy collabs—sound familiar?</p>
+    <div class="image-placeholder"></div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="solution">
+    <h2>This is Paradisio</h2>
+    <p>A platform where you design, host, and monetize experiences—from retreats to workshops—while we handle the messy parts.</p>
+    <div class="image-placeholder"></div>
+  </section>
+
+  <!-- PAYOFF + CALCULATOR -->
+  <section class="payoff">
+    <h2>One Retreat vs. One Year of Shoutouts</h2>
+    <p>See how much more you could earn with Paradisio.</p>
+    <div class="calculator">
+      <h3>Income Disparity Calculator</h3>
+      <p>Enter your current monthly earnings to compare.</p>
+      <input type="number" id="monthlyIncome" placeholder="Monthly income ($)">
+      <input type="number" id="eventPrice" placeholder="Ticket price per fan ($)" value="3000">
+      <input type="number" id="fanCount" placeholder="Fans per event" value="10">
+      <br>
+      <button onclick="calculate()">Calculate</button>
+      <div id="calcResult" class="result"></div>
     </div>
+  </section>
 
-    <!-- Navigation -->
-    <nav class="bg-white/80 backdrop-blur-md fixed w-full z-50 py-4 border-b border-purple-100">
-        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <div class="w-12 h-12 purple-gradient rounded-xl flex items-center justify-center shadow-lg">
-                    <span class="text-white font-bold text-2xl">P</span>
-                </div>
-                <span class="text-2xl font-bold summer-text">PARADIISEO</span>
-            </div>
-            <button class="px-8 py-3 purple-gradient text-white rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                Join Summer Waitlist 🌴
-            </button>
-        </div>
-    </nav>
+  <!-- SAFETY -->
+  <section class="safety">
+    <h2>Build Your Empire, On Your Terms</h2>
+    <p>Verified fans, built-in refunds, your permanent hub. Free yourself from algorithm anxiety.</p>
+    <div class="image-placeholder"></div>
+  </section>
 
-    <!-- Hero Section -->
-    <section class="min-h-screen flex items-center justify-center pt-20 pb-10 px-4 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-purple-50 via-white to-blue-50"></div>
-        <div class="max-w-6xl mx-auto text-center relative z-10">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                Stop Grinding.<br>
-                <span class="summer-text">Start Summer Hosting.</span>
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-                Turn your most dedicated fans into lifelong patrons with exclusive, real-world experiences under the sun. 
-                Paradiiseo gives you the tools to create premium events that earn more than months of subscription churn.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-6 mb-16">
-                <button class="px-8 py-4 purple-gradient text-white rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                    🌅 Join Summer Waitlist
-                </button>
-                <button class="px-8 py-4 border-2 border-purple-200 text-purple-600 rounded-full text-lg font-semibold hover:bg-purple-50 transition-all duration-300">
-                    🎬 Watch Summer Demo
-                </button>
-            </div>
-            
-            <!-- Summer Photo Showcase -->
-            <div class="photo-gallery max-w-4xl mx-auto">
-                <div class="photo-card">
-                    <img src="https://images.unsplash.com/photo-1521747116042-5a810fda9664?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Beach Retreat">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-                        <p class="text-white font-semibold">Miami Beach Retreat</p>
-                    </div>
-                </div>
-                <div class="photo-card">
-                    <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pool Party">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-                        <p class="text-white font-semibold">Poolside Experiences</p>
-                    </div>
-                </div>
-                <div class="photo-card">
-                    <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Sunset Event">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-                        <p class="text-white font-semibold">Sunset Gatherings</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- CTA -->
+  <section class="cta" id="signup">
+    <h2>Be the Host, Not the Content Machine</h2>
+    <p>Ready to host your first experience? Join the waitlist for early access.</p>
+    <form>
+      <input type="email" placeholder="Your email" required style="padding:0.9rem; border-radius:8px; border:none; margin-right:0.5rem;">
+      <button type="submit" class="btn">Join Waitlist</button>
+    </form>
+  </section>
 
-    <!-- The Problem Section -->
-    <section class="py-20 px-4 bg-gradient-to-b from-white to-purple-50">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">The Creator Economy is <span class="summer-text">Broken</span></h2>
-            <p class="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
-                You're stuck creating endless content just to maintain relevance. Your time is spent managing leaks, chasing brand deals, and worrying about platform algorithms.
-            </p>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white rounded-2xl p-8 shadow-lg border border-purple-100 transform hover:scale-105 transition-all duration-300">
-                    <div class="w-16 h-16 purple-gradient rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-sync-alt text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 summer-text">Endless Grind</h3>
-                    <p class="text-gray-600">Non-stop content creation just to stay relevant. The summer passes while you're stuck inside.</p>
-                </div>
-                
-                <div class="bg-white rounded-2xl p-8 shadow-lg border border-purple-100 transform hover:scale-105 transition-all duration-300">
-                    <div class="w-16 h-16 purple-gradient rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-users text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 summer-text">Shallow Exclusivity</h3>
-                    <p class="text-gray-600">"Exclusive" content that thousands can access. Where's the real connection?</p>
-                </div>
-                
-                <div class="bg-white rounded-2xl p-8 shadow-lg border border-purple-100 transform hover:scale-105 transition-all duration-300">
-                    <div class="w-16 h-16 purple-gradient rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-ban text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 summer-text">Platform Anxiety</h3>
-                    <p class="text-gray-600">One algorithm change away from losing everything. Your summer income shouldn't be this fragile.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <footer>
+    © 2025 Paradisio. All rights reserved.
+  </footer>
 
-    <!-- Creator Story Section -->
-    <section class="py-20 px-4 bg-white">
-        <div class="max-w-4xl mx-auto">
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-3xl p-8 md:p-12 shadow-lg">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 summer-text">"I was creating content 24/7 but my fans wanted something real."</h2>
-                <p class="text-lg text-gray-700 mb-6 text-center leading-relaxed">
-                    "Hi, I'm Alina. By day I create content for my subscribers. By night, I answer DMs from fans offering hundreds for a coffee, a dinner, a real connection under the summer stars. They don't want another clip in their inbox - they want to be part of my story. Paradiiseo helped me turn those DMs into $30,000 retreats where I control exactly who attends and how the summer experience unfolds."
-                </p>
-                <div class="text-center">
-                    <span class="text-purple-600 font-semibold">Alina, 26 - Miami 🌊</span>
-                </div>
-            </div>
-        </div>
-    </section>
+  <script>
+    function calculate() {
+      const monthly = parseFloat(document.getElementById("monthlyIncome").value);
+      const ticketPrice = parseFloat(document.getElementById("eventPrice").value);
+      const fans = parseFloat(document.getElementById("fanCount").value);
 
-    <!-- Calculator Section -->
-    <section class="py-20 px-4 bg-gradient-to-b from-purple-50 to-white">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">See Your <span class="summer-text">Summer Potential</span></h2>
-            <p class="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
-                Compare your current subscription income with what you could earn through exclusive summer experiences
-            </p>
-            
-            <div class="grid lg:grid-cols-2 gap-12">
-                <div class="bg-white rounded-3xl p-8 shadow-lg border border-purple-100">
-                    <h3 class="text-2xl font-bold mb-6 summer-text">Summer Earnings Calculator</h3>
-                    
-                    <div class="space-y-6">
-                        <div>
-                            <label class="block text-gray-700 mb-3 font-semibold">🌅 Monthly Subscription Income ($)</label>
-                            <input type="number" id="monthlyIncome" value="5000" class="w-full px-4 py-3 border-2 border-purple-100 rounded-xl focus:border-purple-300 focus:outline-none transition-all">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-gray-700 mb-3 font-semibold">🏖️ Summer Experiences per Year</label>
-                            <input type="number" id="experiencesCount" value="4" class="w-full px-4 py-3 border-2 border-purple-100 rounded-xl focus:border-purple-300 focus:outline-none transition-all">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-gray-700 mb-3 font-semibold">👥 Participants per Experience</label>
-                            <input type="number" id="participantsCount" value="10" class="w-full px-4 py-3 border-2 border-purple-100 rounded-xl focus:border-purple-300 focus:outline-none transition-all">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-gray-700 mb-3 font-semibold">🎫 Ticket Price per Participant ($)</label>
-                            <input type="number" id="ticketPrice" value="3000" class="w-full px-4 py-3 border-2 border-purple-100 rounded-xl focus:border-purple-300 focus:outline-none transition-all">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-white rounded-3xl p-8 shadow-lg border border-purple-100">
-                    <h3 class="text-2xl font-bold mb-6 summer-text">Your Summer Results</h3>
-                    <div id="results" class="space-y-6">
-                        <div class="text-center py-12">
-                            <div class="w-16 h-16 summer-gradient rounded-full flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-sun text-2xl text-white"></i>
-                            </div>
-                            <p class="text-gray-600">Enter your numbers to see your summer potential</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+      if(isNaN(monthly) || isNaN(ticketPrice) || isNaN(fans)) {
+        document.getElementById("calcResult").innerText = "Please enter valid numbers.";
+        return;
+      }
 
-    <!-- Summer Gallery Section -->
-    <section class="py-20 px-4 bg-white">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">Summer <span class="summer-text">Experiences</span> Await</h2>
-            <p class="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
-                Imagine hosting these unforgettable summer experiences while earning more than a year of subscriptions
-            </p>
-            
-            <div class="photo-gallery">
-                <div class="photo-card">
-                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Beach Villa">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                        <p class="text-white font-semibold">Beachfront Villa Retreats</p>
-                    </div>
-                </div>
-                <div class="photo-card">
-                    <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Yacht Party">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                        <p class="text-white font-semibold">Sunset Yacht Parties</p>
-                    </div>
-                </div>
-                <div class="photo-card">
-                    <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Poolside">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                        <p class="text-white font-semibold">Infinity Pool Gatherings</p>
-                    </div>
-                </div>
-                <div class="photo-card">
-                    <img src="https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Tropical">
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                        <p class="text-white font-semibold">Tropical Island Experiences</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+      const yearlySub = monthly * 12;
+      const eventEarnings = ticketPrice * fans;
+      const disparity = eventEarnings - monthly;
 
-    <!-- Final Summer CTA -->
-    <section class="py-20 px-4 relative overflow-hidden">
-        <div class="absolute inset-0 summer-gradient opacity-90"></div>
-        <div class="absolute inset-0 summer-wave"></div>
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">Ready for Your Best Summer Yet?</h2>
-            <p class="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
-                Join thousands of creators who are trading the subscription grind for unforgettable summer experiences.
-            </p>
-            
-            <div class="max-w-md mx-auto">
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-full border-0 focus:outline-none focus:ring-2 focus:ring-white">
-                    <button class="px-8 py-3 bg-white text-purple-600 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
-                        🌞 Join Summer Waitlist
-                    </button>
-                </div>
-                <p class="text-sm mt-4 text-white/75">Join 5,000+ creators ready for summer hosting</p>
-            </div>
-        </div>
-    </section>
+      document.getElementById("calcResult").innerHTML = `
+        <p>👉 Your yearly subscription grind: <strong>$${yearlySub.toLocaleString()}</strong></p>
+        <p>👉 One Paradisio event could earn: <strong>$${eventEarnings.toLocaleString()}</strong></p>
+        <p>${eventEarnings > yearlySub 
+          ? "🚀 Paradisio events can surpass your yearly grind in just one retreat!" 
+          : "🌱 Paradisio events complement your income beautifully."}</p>
+      `;
+    }
+  </script>
 
-    <script>
-        function calculateEarnings() {
-            const monthlyIncome = parseInt(document.getElementById('monthlyIncome').value) || 0;
-            const experiences = parseInt(document.getElementById('experiencesCount').value) || 0;
-            const participants = parseInt(document.getElementById('participantsCount').value) || 0;
-            const ticketPrice = parseInt(document.getElementById('ticketPrice').value) || 0;
-            
-            const annualSubs = monthlyIncome * 12;
-            const experienceEarnings = experiences * participants * ticketPrice * 0.4;
-            
-            const resultsHTML = `
-                <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-6 border-2 border-purple-100">
-                    <h4 class="font-semibold mb-3 summer-text">Annual Subscription Income</h4>
-                    <p class="text-2xl font-bold">$${annualSubs.toLocaleString()}</p>
-                    <p class="text-sm text-gray-600 mt-2">From monthly subscriptions</p>
-                </div>
-                
-                <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 border-2 border-green-100">
-                    <h4 class="font-semibold mb-3 summer-text">Summer Experience Income</h4>
-                    <p class="text-2xl font-bold text-green-600">$${experienceEarnings.toLocaleString()}</p>
-                    <p class="text-sm text-gray-600 mt-2">Your 40% share from ${experiences} experiences</p>
-                </div>
-                
-                <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-6 border-2 border-blue-100">
-                    <h4 class="font-semibold mb-3 summer-text">Summer Advantage</h4>
-                    <p class="text-2xl font-bold ${experienceEarnings > annualSubs ? 'text-green-600' : 'text-red-600'}">
-                        $${Math.abs(experienceEarnings - annualSubs).toLocaleString()}
-                    </p>
-                    <p class="text-sm text-gray-600 mt-2">${experienceEarnings > annualSubs ? 'More' : 'Less'} than subscription income</p>
-                </div>
-            `;
-            
-            document.getElementById('results').innerHTML = resultsHTML;
-        }
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            calculateEarnings();
-            
-            ['monthlyIncome', 'experiencesCount', 'participantsCount', 'ticketPrice'].forEach(id => {
-                document.getElementById(id).addEventListener('input', calculateEarnings);
-            });
-            
-            // Fade in animations
-            const fadeElements = document.querySelectorAll('.fade-in');
-            const fadeObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            fadeElements.forEach(el => fadeObserver.observe(el));
-        });
-    </script>
 </body>
 </html>
