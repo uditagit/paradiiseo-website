@@ -6,494 +6,288 @@
     <title>Paradiiseo - Stop Grinding. Start Hosting.</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #2d1b69 100%);
-            color: #ffffff;
-            overflow-x: hidden;
-        }
-        
-        .purple-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        
-        .purple-bg {
-            background-color: #2d1b69;
-        }
-        
-        .light-purple-bg {
-            background-color: #3d2a77;
-        }
-        
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .float-animation {
-            animation: float 5s ease-in-out infinite;
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            background-size: 300% 300%;
-            animation: gradient-shift 3s ease infinite;
-        }
-        
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
-        }
-        
-        .btn-glow {
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-glow:hover {
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-            transform: translateY(-2px);
-        }
-        
-        .role-card {
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-        
-        .role-card:hover {
-            border-color: #764ba2;
-            transform: scale(1.05);
-        }
-        
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
-        }
-        
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .purple-bg { background-color: #7e22ce; }
+        .light-purple-bg { background-color: #faf5ff; }
+        .purple-gradient { background: linear-gradient(135deg, #7e22ce, #a855f7); }
+        .purple-text { color: #7e22ce; }
+        .section-spacing { padding: 80px 0; }
     </style>
 </head>
-<body class="min-h-screen">
-    <!-- Navigation -->
-    <nav class="glass-effect fixed w-full z-50 py-4">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
+<body class="font-['Inter'] bg-white text-gray-900">
+    <!-- Navigation - Simple and Clean -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-sm z-50 py-4 border-b">
+        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
                 <div class="w-10 h-10 purple-gradient rounded-lg flex items-center justify-center">
-                    <span class="text-white font-bold text-xl">P</span>
+                    <span class="text-white font-bold text-lg">P</span>
                 </div>
-                <span class="text-xl font-bold gradient-text">PARADIISEO</span>
+                <span class="text-xl font-semibold purple-text">PARADIISEO</span>
             </div>
-            
-            <div class="hidden md:flex space-x-8">
-                <a href="#problem" class="text-gray-300 hover:text-white transition">The Problem</a>
-                <a href="#solution" class="text-gray-300 hover:text-white transition">The Solution</a>
-                <a href="#collaboration" class="text-gray-300 hover:text-white transition">Collaboration</a>
-                <a href="#waitlist" class="text-gray-300 hover:text-white transition">Join Waitlist</a>
-            </div>
-            
-            <div class="flex space-x-4">
-                <button class="px-6 py-2 purple-gradient text-white rounded-full btn-glow">Join Waitlist</button>
-            </div>
+            <button class="px-6 py-2 purple-gradient text-white rounded-full font-medium hover:opacity-90 transition">
+                Get Started
+            </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="min-h-screen flex items-center justify-center pt-20 pb-10 px-6">
-        <div class="container mx-auto text-center">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6">Stop Grinding. <span class="gradient-text">Start Hosting.</span></h1>
-            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                Turn your most dedicated fans into lifelong patrons with exclusive, real-world experiences. Paradiiseo gives you the tools to create premium events that earn more than months of subscription churn.
+    <!-- Hero Section - Spacious and Inviting -->
+    <section class="min-h-screen flex items-center justify-center section-spacing light-purple-bg mt-16">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <h1 class="text-5xl md:text-6xl font-bold mb-8 leading-tight">
+                Stop Grinding.<br>
+                <span class="purple-text">Start Hosting.</span>
+            </h1>
+            <p class="text-xl text-gray-600 mb-12 leading-relaxed max-w-3xl mx-auto">
+                Turn your most dedicated fans into lifelong patrons with exclusive, real-world experiences. 
+                Paradiiseo gives you the tools to create premium events that earn more than months of subscription churn.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12">
-                <button class="px-8 py-3 purple-gradient text-white rounded-full text-lg font-semibold btn-glow">
-                    Join the Waitlist for Early Access
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-16">
+                <button class="px-8 py-3 purple-gradient text-white rounded-full font-medium hover:opacity-90 transition">
+                    Start Creating Free
                 </button>
-                <button class="px-8 py-3 glass-effect text-white rounded-full text-lg font-semibold border border-gray-600">
-                    Watch How It Works (2 min)
+                <button class="px-8 py-3 border border-gray-300 text-gray-700 rounded-full font-medium hover:border-purple-300 transition">
+                    See How It Works
                 </button>
             </div>
-            <div class="relative max-w-4xl mx-auto">
-                <div class="glass-effect rounded-2xl p-1 float-animation">
-                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
-                         alt="Creator hosting an exclusive experience" 
-                         class="rounded-2xl w-full h-auto">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- The Problem Section -->
-    <section id="problem" class="py-20 px-6 purple-bg">
-        <div class="container mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">The Creator Economy is Broken. <span class="gradient-text">You Feel It Every Day.</span></h2>
-            <p class="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto">
-                You're stuck creating endless content just to maintain relevance. Your time is spent managing leaks, chasing brand deals, and worrying about platform algorithms.
-            </p>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <div class="glass-effect rounded-2xl p-6 text-center">
-                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-sync-alt text-2xl text-white"></i>
+            <!-- Simple Preview Image -->
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl p-8">
+                    <div class="aspect-video bg-white rounded-lg shadow-sm flex items-center justify-center">
+                        <span class="text-gray-400">Platform Preview</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">The Endless Grind</h3>
-                    <p class="text-gray-300">Non-stop content creation just to stay relevant</p>
-                </div>
-                
-                <div class="glass-effect rounded-2xl p-6 text-center">
-                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-users text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Shallow Exclusivity</h3>
-                    <p class="text-gray-300">"Exclusive" content that thousands can access</p>
-                </div>
-                
-                <div class="glass-effect rounded-2xl p-6 text-center">
-                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-exclamation-triangle text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Leak Nightmare</h3>
-                    <p class="text-gray-300">Constant rebranding and lost identity</p>
-                </div>
-                
-                <div class="glass-effect rounded-2xl p-6 text-center">
-                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-table text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Messy Collaborations</h3>
-                    <p class="text-gray-300">Spreadsheet drama and payment arguments</p>
-                </div>
-                
-                <div class="glass-effect rounded-2xl p-6 text-center">
-                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-ban text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Platform Anxiety</h3>
-                    <p class="text-gray-300">One algorithm change away from losing everything</p>
-                </div>
-                
-                <div class="glass-effect rounded-2xl p-6 text-center">
-                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-chart-line text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Revenue Ceiling</h3>
-                    <p class="text-gray-300">Stuck selling access for pocket change</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Creator Story Section -->
-    <section class="py-20 px-6">
-        <div class="container mx-auto max-w-4xl">
-            <div class="glass-effect rounded-2xl p-8 md:p-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 gradient-text">"I was creating content 24/7 but my fans wanted something real."</h2>
-                <p class="text-lg text-gray-300 mb-6 text-center">
-                    "Hi, I'm Alina. By day I create content for my subscribers. By night, I answer DMs from fans offering hundreds for a coffee, a dinner, a real connection. They don't want another clip in their inbox - they want to be part of my story. Paradiiseo helped me turn those DMs into $30,000 retreats where I control exactly who attends and how the experience unfolds."
+    <!-- The Problem Section - Clean and Relatable -->
+    <section class="section-spacing bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">The Creator Economy is Broken</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    You feel it every day. The endless grind, the platform anxiety, the revenue ceiling. 
+                    It's time for a better way.
                 </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                <!-- Problem 1 -->
                 <div class="text-center">
-                    <span class="text-purple-300 font-semibold">Alina, 26 - Miami</span>
+                    <div class="w-16 h-16 purple-gradient rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 purple-text">The Endless Grind</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Non-stop content creation just to stay relevant. Your time is spent managing leaks, 
+                        chasing brand deals, and worrying about platform algorithms instead of creating meaningful experiences.
+                    </p>
+                </div>
+
+                <!-- Problem 2 -->
+                <div class="text-center">
+                    <div class="w-16 h-16 purple-gradient rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 purple-text">Shallow Exclusivity</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        "Exclusive" content that thousands can access. Fans quickly realize the content isn't truly 
+                        exclusive if thousands of others are seeing the exact same thing.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- The Solution Section -->
-    <section id="solution" class="py-20 px-6 light-purple-bg">
-        <div class="container mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">Host Premium Experiences. <span class="gradient-text">Make Fans Part of Your Story.</span></h2>
-            <p class="text-xl text-gray-400 text-center mb-8 max-w-3xl mx-auto">
-                Paradiiseo is the first platform built for creators to design, host, and monetize real-world experiences.
-            </p>
-            
-            <div class="glass-effect rounded-2xl p-8 max-w-4xl mx-auto mt-12">
-                <h3 class="text-2xl font-bold mb-4 text-center gradient-text">You Control Who Attends</h3>
-                <p class="text-gray-300 text-center mb-6">
-                    Vet every participant, set your standards, and ensure the experience matches your vision. No more random audiences - only the fans who truly appreciate your work.
+    <!-- Creator Story - Personal and Relatable -->
+    <section class="section-spacing light-purple-bg">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-gray-100">
+                <div class="text-center mb-8">
+                    <div class="w-20 h-20 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-2xl">👋</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold purple-text">"I was creating content 24/7 but my fans wanted something real."</h3>
+                </div>
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    "Hi, I'm Alina. By day I create content for my subscribers. By night, I answer DMs from fans offering hundreds for a coffee, a dinner, a real connection. They don't want another clip in their inbox - they want to be part of my story."
                 </p>
-                <div class="grid md:grid-cols-2 gap-6 mt-8">
-                    <div class="flex items-start space-x-3">
-                        <div class="w-8 h-8 purple-gradient rounded-full flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-check text-white text-sm"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold">Application Review</h4>
-                            <p class="text-gray-400 text-sm">Vet every potential attendee before they can purchase</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3">
-                        <div class="w-8 h-8 purple-gradient rounded-full flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-check text-white text-sm"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold">Custom Criteria</h4>
-                            <p class="text-gray-400 text-sm">Set requirements that match your brand values</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3">
-                        <div class="w-8 h-8 purple-gradient rounded-full flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-check text-white text-sm"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold">Final Approval Power</h4>
-                            <p class="text-gray-400 text-sm">No one joins without your explicit approval</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3">
-                        <div class="w-8 h-8 purple-gradient rounded-full flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-check text-white text-sm"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold">Conduct Standards</h4>
-                            <p class="text-gray-400 text-sm">Enforce rules that ensure everyone's comfort and safety</p>
-                        </div>
-                    </div>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    "Paradiiseo helped me turn those DMs into $30,000 retreats where I control exactly who attends and how the experience unfolds. Finally, I'm building real relationships instead of just churning out content."
+                </p>
+                <div class="text-center mt-8">
+                    <span class="text-purple-600 font-medium">— Alina, Creator from Miami</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Collaboration Engine Section -->
-    <section id="collaboration" class="py-20 px-6">
-        <div class="container mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">The End of <span class="gradient-text">Spreadsheet Drama</span></h2>
-            <p class="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto">
-                Our system understands how creative collaborations actually work. Bring together the perfect team and let Paradiiseo handle the clean money splits automatically.
-            </p>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
-                <div class="role-card glass-effect rounded-2xl p-6 text-center">
-                    <div class="w-20 h-20 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-crown text-2xl text-white"></i>
+    <!-- The Solution - Clear and Simple -->
+    <section class="section-spacing bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">How Paradiiseo Works</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Simple, powerful tools that put you in control of your creative business
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="text-center p-6">
+                    <div class="w-12 h-12 purple-gradient rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-lg">1</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">HOST</h3>
-                    <p class="text-gray-300 text-sm">You set the vision, rules, and have final approval on everything</p>
+                    <h3 class="text-lg font-semibold mb-3 purple-text">Create Your Experience</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Design your perfect event - from intimate dinners to luxury retreats. Set your rules, pricing, and vision.
+                    </p>
                 </div>
-                
-                <div class="role-card glass-effect rounded-2xl p-6 text-center">
-                    <div class="w-20 h-20 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-handshake text-2xl text-white"></i>
+
+                <div class="text-center p-6">
+                    <div class="w-12 h-12 purple-gradient rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-lg">2</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">CO-HOST</h3>
-                    <p class="text-gray-300 text-sm">Your trusted partner in managing the experience</p>
+                    <h3 class="text-lg font-semibold mb-3 purple-text">Invite Your Team</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Bring collaborators, co-hosts, and professionals. Set automatic revenue splits - no spreadsheets needed.
+                    </p>
                 </div>
-                
-                <div class="role-card glass-effect rounded-2xl p-6 text-center">
-                    <div class="w-20 h-20 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-star text-2xl text-white"></i>
+
+                <div class="text-center p-6">
+                    <div class="w-12 h-12 purple-gradient rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-lg">3</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">HEADLINERS</h3>
-                    <p class="text-gray-300 text-sm">Featured creators who bring their audience to your event</p>
-                </div>
-                
-                <div class="role-card glass-effect rounded-2xl p-6 text-center">
-                    <div class="w-20 h-20 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-video text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">CREW</h3>
-                    <p class="text-gray-300 text-sm">Professionals paid automatically from ticket sales</p>
-                </div>
-                
-                <div class="role-card glass-effect rounded-2xl p-6 text-center">
-                    <div class="w-20 h-20 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-users text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">PARTICIPANTS</h3>
-                    <p class="text-gray-300 text-sm">Your vetted superfans who become part of your story</p>
+                    <h3 class="text-lg font-semibold mb-3 purple-text">Host & Earn</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Focus on creating amazing experiences. We handle payments, scheduling, and participant management.
+                    </p>
                 </div>
             </div>
-            
-            <!-- Miami Retreat Example -->
-            <div class="glass-effect rounded-2xl p-8 max-w-4xl mx-auto mt-16">
-                <h3 class="text-2xl font-bold mb-6 text-center gradient-text">The Miami Retreat: How $30,000 Happens</h3>
-                <div class="grid md:grid-cols-2 gap-8">
+        </div>
+    </section>
+
+    <!-- Calculator Section - Clean and Functional -->
+    <section class="section-spacing light-purple-bg">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">See the Difference</h2>
+                <p class="text-xl text-gray-600">
+                    Compare your current earnings with what's possible
+                </p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Inputs -->
                     <div>
-                        <h4 class="font-semibold mb-4">Revenue Split Example:</h4>
-                        <div class="space-y-3">
-                            <div class="flex justify-between items-center">
-                                <span>HOST (You)</span>
-                                <span class="font-bold gradient-text">40% - $12,000</span>
+                        <h3 class="text-xl font-semibold mb-6 purple-text">Your Numbers</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Monthly Subscription Income</label>
+                                <input type="number" id="monthlyIncome" value="5000" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-purple-300 focus:ring-1 focus:ring-purple-300">
                             </div>
-                            <div class="flex justify-between items-center">
-                                <span>HEADLINER</span>
-                                <span class="font-bold">25% - $7,500</span>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Experiences per Year</label>
+                                <input type="number" id="experiencesCount" value="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-purple-300 focus:ring-1 focus:ring-purple-300">
                             </div>
-                            <div class="flex justify-between items-center">
-                                <span>CO-HOST</span>
-                                <span class="font-bold">15% - $4,500</span>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Participants per Experience</label>
+                                <input type="number" id="participantsCount" value="10" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-purple-300 focus:ring-1 focus:ring-purple-300">
                             </div>
-                            <div class="flex justify-between items-center">
-                                <span>CREW</span>
-                                <span class="font-bold">10% - $3,000</span>
-                            </div>
-                            <div class="flex justify-between items-center border-t border-gray-600 pt-3">
-                                <span class="font-semibold">TOTAL (10 participants × $3,000)</span>
-                                <span class="font-bold gradient-text">$30,000</span>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Ticket Price per Participant</label>
+                                <input type="number" id="ticketPrice" value="3000" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-purple-300 focus:ring-1 focus:ring-purple-300">
                             </div>
                         </div>
                     </div>
+
+                    <!-- Results -->
                     <div>
-                        <h4 class="font-semibold mb-4">What You Get:</h4>
-                        <ul class="space-y-2 text-gray-300">
-                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i> $12,000 for one weekend</li>
-                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i> Viral content in exotic locations</li>
-                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i> Expanded reach to new audiences</li>
-                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i> No payment chasing - automatic splits</li>
-                            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i> Complete control over the experience</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Final CTA Section -->
-    <section id="waitlist" class="py-20 px-6 purple-gradient">
-        <div class="container mx-auto text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6">Ready to Host Your First Experience?</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-                Join creators who are designing their exit from the subscription grind. Be the first to access Paradiiseo when we launch.
-            </p>
-            
-            <div class="max-w-md mx-auto">
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-full text-gray-900">
-                    <button class="px-8 py-3 bg-white text-purple-600 rounded-full font-semibold btn-glow whitespace-nowrap">
-                        Join Waitlist
-                    </button>
-                </div>
-                <p class="text-sm mt-4 opacity-75">Join 5,000+ creators on the waitlist</p>
-            </div>
-            
-            <div class="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-12">
-                <div class="text-center">
-                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fas fa-earlybirds text-white"></i>
-                    </div>
-                    <p class="font-semibold">Early Access</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fas fa-eye text-white"></i>
-                    </div>
-                    <p class="font-semibold">First Look</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fas fa-headset text-white"></i>
-                    </div>
-                    <p class="font-semibold">Onboarding Support</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fas fa-star text-white"></i>
-                    </div>
-                    <p class="font-semibold">Priority Access</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-12 px-6 bg-gray-900">
-        <div class="container mx-auto">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <div class="flex items-center space-x-2 mb-4">
-                        <div class="w-8 h-8 purple-gradient rounded-lg flex items-center justify-center">
-                            <span class="text-white font-bold">P</span>
+                        <h3 class="text-xl font-semibold mb-6 purple-text">Results</h3>
+                        <div id="results" class="space-y-4">
+                            <!-- Results will appear here -->
                         </div>
-                        <span class="text-xl font-bold gradient-text">PARADIISEO</span>
                     </div>
-                    <p class="text-gray-400">Where creators become hosts and fans become part of the story.</p>
-                </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4">For Creators</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition">Features</a></li>
-                        <li><a href="#" class="hover:text-white transition">Pricing</a></li>
-                        <li><a href="#" class="hover:text-white transition">Success Stories</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4">Resources</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition">Help Center</a></li>
-                        <li><a href="#" class="hover:text-white transition">Safety & Trust</a></li>
-                        <li><a href="#" class="hover:text-white transition">Community</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4">Company</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition">About</a></li>
-                        <li><a href="#" class="hover:text-white transition">Contact</a></li>
-                        <li><a href="#" class="hover:text-white transition">Privacy</a></li>
-                    </ul>
                 </div>
             </div>
-            
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 Paradiiseo. All rights reserved.</p>
+        </div>
+    </section>
+
+    <!-- Final CTA - Simple and Clear -->
+    <section class="section-spacing purple-gradient">
+        <div class="max-w-2xl mx-auto text-center px-4">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">Ready to Start Hosting?</h2>
+            <p class="text-xl text-white/90 mb-8">
+                Join creators who are building sustainable businesses around meaningful experiences.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="px-8 py-3 bg-white text-purple-600 rounded-full font-medium hover:bg-gray-50 transition">
+                    Start Free Trial
+                </button>
+                <button class="px-8 py-3 border border-white text-white rounded-full font-medium hover:bg-white/10 transition">
+                    Schedule a Demo
+                </button>
             </div>
+        </div>
+    </section>
+
+    <!-- Footer - Clean and Simple -->
+    <footer class="py-12 bg-gray-50 border-t">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-4">
+                <div class="w-8 h-8 purple-gradient rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold">P</span>
+                </div>
+                <span class="text-lg font-semibold purple-text">PARADIISEO</span>
+            </div>
+            <p class="text-gray-600 mb-2">Where creators become hosts and fans become part of the story.</p>
+            <p class="text-gray-500 text-sm">&copy; 2024 Paradiiseo. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Scroll animations
+        function calculateEarnings() {
+            const monthlyIncome = parseInt(document.getElementById('monthlyIncome').value) || 0;
+            const experiences = parseInt(document.getElementById('experiencesCount').value) || 0;
+            const participants = parseInt(document.getElementById('participantsCount').value) || 0;
+            const ticketPrice = parseInt(document.getElementById('ticketPrice').value) || 0;
+            
+            const annualSubs = monthlyIncome * 12;
+            const experienceEarnings = experiences * participants * ticketPrice * 0.4;
+            
+            const resultsHTML = `
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <h4 class="font-semibold text-sm text-gray-700 mb-2">Annual Subscription Income</h4>
+                    <p class="text-2xl font-bold purple-text">$${annualSubs.toLocaleString()}</p>
+                </div>
+                
+                <div class="bg-green-50 rounded-lg p-4">
+                    <h4 class="font-semibold text-sm text-gray-700 mb-2">Experience Income (Your 40%)</h4>
+                    <p class="text-2xl font-bold text-green-600">$${experienceEarnings.toLocaleString()}</p>
+                </div>
+                
+                <div class="bg-blue-50 rounded-lg p-4">
+                    <h4 class="font-semibold text-sm text-gray-700 mb-2">Difference</h4>
+                    <p class="text-2xl font-bold ${experienceEarnings > annualSubs ? 'text-green-600' : 'text-red-600'}">
+                        $${Math.abs(experienceEarnings - annualSubs).toLocaleString()}
+                    </p>
+                    <p class="text-sm text-gray-600">${experienceEarnings > annualSubs ? 'More' : 'Less'} than subscriptions</p>
+                </div>
+            `;
+            
+            document.getElementById('results').innerHTML = resultsHTML;
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
-            const fadeElements = document.querySelectorAll('.fade-in');
+            calculateEarnings();
             
-            const fadeObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            fadeElements.forEach(el => fadeObserver.observe(el));
-            
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
+            ['monthlyIncome', 'experiencesCount', 'participantsCount', 'ticketPrice'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateEarnings);
             });
         });
     </script>
