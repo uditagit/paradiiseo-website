@@ -1,276 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paradisio – Revolutionizing Creator Experiences</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #7248b5;
-      --secondary: #ffffff;
-      --dark: #0d0d0d;
-      --glass-bg: rgba(255, 255, 255, 0.1);
-      --transition: all 0.4s ease;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paradiiseo — Revolutionizing Creator Experiences</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#7248b5;
+    --purple-900:#5e3aa5;
+    --purple-950:#472c82;
+    --ink:#0a0a0a;
+    --white:#fff;
+    --glass:rgba(255,255,255,.12);
+    --glass-strong:rgba(255,255,255,.18);
+    --stroke:rgba(255,255,255,.35);
+    --ease:.35s cubic-bezier(.2,.8,.2,1);
+  }
 
-    body {
-      margin: 0;
-      font-family: 'Space Grotesk', sans-serif;
-      background: var(--primary);
-      color: var(--secondary);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+  /* RESET / BASE */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; overflow-x:hidden;
+    font-family:'Space Grotesk', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background:
+      radial-gradient(70rem 70rem at 85% -10%, rgba(255,255,255,.14) 0%, transparent 60%),
+      radial-gradient(45rem 45rem at -10% 110%, rgba(255,255,255,.10) 0%, transparent 60%),
+      linear-gradient(180deg, var(--purple) 0%, var(--purple-900) 60%, var(--purple-950) 100%);
+    color:var(--white);
+    line-height:1.65;
+  }
+  .wrap{width:min(1180px,92%); margin-inline:auto}
+  section{padding:clamp(3rem,6vw,6rem) 0; position:relative}
 
-    h1, h2, h3 {
-      font-weight: 700;
-      margin-bottom: 1rem;
-      letter-spacing: -1px;
-    }
+  /* TYPOGRAPHY (fluid + punchy) */
+  h1,h2,h3{letter-spacing:-.02em; margin:0 0 1rem}
+  h1{font-size:clamp(2.4rem,6vw,4.2rem); font-weight:800}
+  h2{font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:800}
+  h3{font-size:clamp(1.2rem,2.2vw,1.5rem); font-weight:700}
+  p{margin:.6rem 0; opacity:.94; font-size:clamp(1rem,1.2vw,1.125rem)}
 
-    h1 {
-      font-size: 3.5rem;
-    }
+  /* GLASS TITLES */
+  .glass-title{
+    display:inline-block;
+    padding:.65rem 1rem .55rem 1rem;
+    border-radius:18px;
+    background:var(--glass);
+    border:1px solid var(--stroke);
+    backdrop-filter:blur(14px);
+    box-shadow:0 10px 30px rgba(0,0,0,.25) inset, 0 10px 26px rgba(0,0,0,.18);
+    text-shadow:0 1px 0 rgba(0,0,0,.35);
+  }
 
-    h2 {
-      font-size: 2.2rem;
-    }
+  /* CARDS */
+  .card{
+    background:var(--glass);
+    border:1px solid var(--stroke);
+    border-radius:22px;
+    backdrop-filter:blur(16px);
+    padding:clamp(1.25rem,2.8vw,2rem);
+    box-shadow:0 16px 50px rgba(0,0,0,.35);
+    transition:transform var(--ease), box-shadow var(--ease), background var(--ease), border-color var(--ease);
+  }
+  .card:hover{transform:translateY(-6px); box-shadow:0 24px 64px rgba(0,0,0,.5); background:var(--glass-strong)}
 
-    section {
-      padding: 5rem 10%;
-      position: relative;
-    }
+  /* GRID */
+  .grid{display:grid; gap:clamp(1rem,2.2vw,1.6rem); grid-template-columns:repeat(12,1fr)}
+  .col-6{grid-column:span 6} .col-5{grid-column:span 5} .col-7{grid-column:span 7} .col-12{grid-column:span 12}
+  @media (max-width:900px){ .col-6,.col-5,.col-7{grid-column:span 12} }
 
-    .hero {
-      text-align: center;
-      padding: 7rem 10% 6rem;
-    }
+  /* IMAGE PLACEHOLDERS */
+  .img-hole{height:260px; border:1px dashed rgba(255,255,255,.55); border-radius:16px; display:grid; place-items:center; color:rgba(255,255,255,.7); font-weight:700; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0))}
 
-    .hero h1 {
-      animation: fadeInDown 1s ease forwards;
-    }
+  /* BUTTONS */
+  .btn{
+    --bg:rgba(255,255,255,.14);
+    display:inline-flex; align-items:center; gap:.6rem;
+    padding:1rem 1.4rem; border-radius:999px;
+    background:var(--bg); color:#fff; text-decoration:none; font-weight:800; letter-spacing:.01em;
+    border:1px solid var(--stroke); position:relative; overflow:hidden;
+    transition:transform var(--ease), box-shadow var(--ease), background var(--ease), color var(--ease);
+    backdrop-filter:blur(10px);
+    box-shadow:0 10px 26px rgba(0,0,0,.25);
+  }
+  .btn::after{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(180px 80px at var(--x,50%) var(--y,50%), rgba(255,255,255,.25), transparent 40%);
+    opacity:0; transition:opacity .25s ease;
+  }
+  .btn:hover{transform:translateY(-3px); box-shadow:0 18px 42px rgba(0,0,0,.45); background:rgba(0,0,0,.35)}
+  .btn:hover::after{opacity:1}
+  .btn.dark{background:#000; border-color:#000}
 
-    .btn {
-      display: inline-block;
-      padding: 0.9rem 2rem;
-      background: white;
-      color: var(--primary);
-      font-weight: bold;
-      border-radius: 50px;
-      text-decoration: none;
-      transition: var(--transition);
-      box-shadow: 0 0 10px rgba(255,255,255,0.2);
-    }
+  /* HERO */
+  .hero .lede{max-width:880px}
 
-    .btn:hover {
-      background: var(--dark);
-      color: white;
-      box-shadow: 0 0 20px rgba(255,255,255,0.4);
-    }
+  /* SCROLL REVEALS */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s var(--ease), transform .7s var(--ease)}
+  .reveal.on{opacity:1; transform:none}
 
-    .glass-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 20px;
-      padding: 2rem;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-      transition: var(--transition);
-    }
+  /* CALCULATOR */
+  .calc{position:relative; overflow:hidden}
+  .calc::before{
+    content:""; position:absolute; inset:-20%;
+    background: radial-gradient(32rem 32rem at 120% -10%, rgba(255,255,255,.14) 0%, transparent 60%),
+                radial-gradient(28rem 28rem at -10% 120%, rgba(0,0,0,.18) 0%, transparent 60%);
+    filter: blur(12px); pointer-events:none;
+  }
+  .pill{display:inline-block; padding:.45rem .8rem; border-radius:999px; background:rgba(255,255,255,.12); border:1px solid var(--stroke); font-weight:700; font-size:.95rem}
 
-    .glass-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-    }
+  .controls{display:grid; gap:1rem; grid-template-columns:repeat(12,1fr)}
+  .control{grid-column:span 4; background:rgba(0,0,0,.28); border-radius:14px; padding:1rem; border:1px solid rgba(255,255,255,.18)}
+  @media (max-width:900px){ .control{grid-column:span 12} }
+  .control label{display:flex; justify-content:space-between; align-items:center; font-weight:800}
+  .val{min-width:80px; text-align:right; background:#000; color:#fff; border:1px solid var(--stroke); border-radius:10px; padding:.32rem .6rem}
+  .row{display:flex; gap:.75rem; align-items:center; margin-top:.75rem}
+  .num{width:140px; padding:.8rem .8rem; border-radius:12px; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.1); color:#fff; font-weight:800; text-align:center; outline:none; transition:box-shadow var(--ease), background var(--ease), border-color var(--ease)}
+  .num:focus{box-shadow:0 0 0 6px rgba(255,255,255,.14); background:rgba(255,255,255,.18); border-color:rgba(255,255,255,.45)}
+  input[type=range]{width:100%; height:8px; border-radius:999px; background:rgba(255,255,255,.28); appearance:none; outline:none}
+  input[type=range]::-webkit-slider-thumb{appearance:none; width:18px; height:18px; border-radius:50%; background:#fff; border:2px solid #000; box-shadow:0 0 0 6px rgba(255,255,255,.18); transition:transform var(--ease), box-shadow var(--ease)}
+  input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.1); box-shadow:0 0 0 10px rgba(255,255,255,.24)}
+  input[type=range]::-moz-range-thumb{width:18px; height:18px; border-radius:50%; background:#fff}
 
-    /* Calculator */
-    .calculator {
-      margin-top: 2rem;
-      text-align: center;
-    }
+  .actions{display:flex; flex-wrap:wrap; gap:.8rem; margin-top:1rem}
+  .ghost{background:transparent; color:#fff; border:1px solid var(--stroke); border-radius:999px; padding:.95rem 1.2rem; font-weight:800; cursor:pointer; transition:all var(--ease)}
+  .ghost:hover{background:#000; border-color:#000}
 
-    .calc-input {
-      margin: 1rem 0;
-    }
+  .results{margin-top:1.2rem; display:grid; gap:1rem; grid-template-columns:repeat(12,1fr); align-items:end}
+  .result-card{grid-column:span 6; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.2); border-radius:14px; padding:1rem}
+  @media (max-width:900px){ .result-card{grid-column:span 12} }
+  .stat{display:flex; align-items:center; justify-content:space-between; font-weight:800}
+  .bar{height:12px; border-radius:10px; background:rgba(255,255,255,.22); overflow:hidden; margin-top:.6rem}
+  .bar > span{display:block; height:100%; width:0%; background:linear-gradient(90deg,#fff,#dedaff); transition:width .9s cubic-bezier(.2,.9,.2,1)}
+  .delta{margin-top:.6rem; font-weight:800; color:#00ffcc; text-shadow:0 0 14px rgba(0,255,204,.35)}
+  .muted{opacity:.9; margin-top:.35rem}
 
-    .calc-input label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-
-    .calc-input input[type=number] {
-      padding: 0.8rem;
-      border-radius: 10px;
-      border: none;
-      width: 200px;
-      text-align: center;
-      background: rgba(255,255,255,0.15);
-      color: white;
-      font-size: 1rem;
-      transition: var(--transition);
-    }
-
-    .calc-input input[type=number]:focus {
-      outline: none;
-      box-shadow: 0 0 15px rgba(255,255,255,0.6);
-      background: rgba(255,255,255,0.25);
-    }
-
-    .calc-input input[type=range] {
-      width: 70%;
-      margin-top: 0.5rem;
-      -webkit-appearance: none;
-      height: 6px;
-      background: rgba(255,255,255,0.3);
-      border-radius: 10px;
-      outline: none;
-      transition: background 0.3s;
-    }
-
-    .calc-input input[type=range]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: white;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-
-    .calc-input input[type=range]::-webkit-slider-thumb:hover {
-      transform: scale(1.2);
-      background: black;
-    }
-
-    .calculator button {
-      margin-top: 1.5rem;
-      padding: 1rem 2rem;
-      background: white;
-      color: var(--primary);
-      border: none;
-      border-radius: 50px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .calculator button:hover {
-      background: black;
-      color: white;
-      box-shadow: 0 0 20px rgba(255,255,255,0.3);
-    }
-
-    .result {
-      margin-top: 2rem;
-      font-size: 1.3rem;
-      font-weight: 600;
-      background: rgba(0,0,0,0.4);
-      padding: 1.5rem;
-      border-radius: 15px;
-      animation: fadeIn 0.8s ease forwards;
-    }
-
-    /* Keyframes */
-    @keyframes fadeInDown {
-      from {opacity: 0; transform: translateY(-30px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    footer {
-      background: black;
-      color: white;
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-    }
-  </style>
+  footer{padding:2.4rem 0; text-align:center; color:rgba(255,255,255,.9)}
+</style>
 </head>
 <body>
 
-  <!-- HERO -->
+  <!-- HERO / HOOK -->
   <section class="hero">
-    <h1>Revolutionizing Creator Experiences</h1>
-    <p>Tired of the subscription hamster wheel? It’s time to reclaim your creativity with Paradisio.</p>
-    <a href="#signup" class="btn">Creator Pre-Sign Up</a>
+    <div class="wrap">
+      <h1 class="glass-title reveal">Revolutionizing Creator Experiences</h1>
+      <p class="lede reveal">Tired of the subscription hamster wheel? Parad­iiseo lets you design, host and monetize real-world experiences—while the Collab Engine handles roles, ops, and clean payouts.</p>
+      <div class="reveal" style="margin:1.2rem 0 0">
+        <a class="btn" href="#cta" id="ctaBtn">Creator Pre-Sign Up</a>
+      </div>
+      <div class="img-hole reveal" style="margin-top:1.2rem">Hero image space</div>
+    </div>
   </section>
 
-  <!-- PAYOFF + FUTURISTIC CALCULATOR -->
+  <!-- PROBLEM -->
   <section>
-    <div class="glass-card">
-      <h2>Income Disparity Calculator</h2>
-      <p>Compare your grind earnings with potential Paradisio events.</p>
+    <div class="wrap grid">
+      <div class="col-6 card reveal">
+        <h2 class="glass-title">The Grind Is Real</h2>
+        <p>Alina’s story mirrors countless creators: constant churn, platform anxiety, shallow connections. If that’s you, you’re not alone.</p>
+        <div class="img-hole">Hook visual</div>
+      </div>
+      <div class="col-6 card reveal">
+        <h2 class="glass-title">The Creator Economy Is Broken</h2>
+        <p>Market flooded. Endless grind. Shallow exclusivity. Leak nightmares. Messy collabs. Fragile funnels. You’re leaving money and true connection on the table.</p>
+        <div class="img-hole">Problem graphic</div>
+      </div>
+    </div>
+  </section>
 
-      <div class="calculator">
-        <div class="calc-input">
-          <label for="monthlyIncome">Monthly Subscription Income ($): 
-            <span id="monthlyVal">1000</span>
-          </label>
-          <input type="range" id="monthlyIncome" min="100" max="10000" step="100" value="1000" oninput="updateLabel('monthlyIncome','monthlyVal')">
+  <!-- SOLUTION -->
+  <section>
+    <div class="wrap card reveal">
+      <h2 class="glass-title">This Is Paradiiseo</h2>
+      <p>Reclaim your creativity. Design, host and monetize exclusive fan experiences—from luxury retreats to private workshops—without spreadsheets or chaos.</p>
+      <div class="img-hole">Solution animation / video</div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS / COLLAB ENGINE -->
+  <section>
+    <div class="wrap card reveal">
+      <h2 class="glass-title">The Collab Engine</h2>
+      <p><strong>No spreadsheets. No drama. Just clean money.</strong></p>
+      <p><strong>Roles:</strong> Host (you) control. Co-hosts & Headliners bring audiences. Crew get paid upfront. Participants (fans) buy tickets for real access.</p>
+      <div class="img-hole">Interactive flowchart placeholder</div>
+    </div>
+  </section>
+
+  <!-- PAYOFF + CALCULATOR -->
+  <section>
+    <div class="wrap card calc reveal">
+      <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;justify-content:space-between">
+        <h2 class="glass-title">One Retreat vs. One Year of Shoutouts</h2>
+        <span class="pill">Interactive • Transparent • Real numbers</span>
+      </div>
+
+      <div class="controls" style="margin-top:1rem">
+        <!-- Monthly subscription income -->
+        <div class="control">
+          <label for="monthly">Monthly subscriptions ($) <span class="val" id="v-monthly">2000</span></label>
+          <div class="row">
+            <input class="num" type="number" id="monthly" min="0" step="50" value="2000">
+            <input type="range" id="r-monthly" min="0" max="20000" step="50" value="2000">
+          </div>
         </div>
-
-        <div class="calc-input">
-          <label for="eventPrice">Ticket Price per Fan ($): 
-            <span id="priceVal">3000</span>
-          </label>
-          <input type="range" id="eventPrice" min="100" max="10000" step="100" value="3000" oninput="updateLabel('eventPrice','priceVal')">
+        <!-- Ticket price -->
+        <div class="control">
+          <label for="price">Ticket price per fan ($) <span class="val" id="v-price">2500</span></label>
+          <div class="row">
+            <input class="num" type="number" id="price" min="50" step="50" value="2500">
+            <input type="range" id="r-price" min="50" max="20000" step="50" value="2500">
+          </div>
         </div>
-
-        <div class="calc-input">
-          <label for="fanCount">Fans per Event: 
-            <span id="fanVal">10</span>
-          </label>
-          <input type="range" id="fanCount" min="5" max="100" step="1" value="10" oninput="updateLabel('fanCount','fanVal')">
+        <!-- Fans per event -->
+        <div class="control">
+          <label for="fans">Fans per event <span class="val" id="v-fans">12</span></label>
+          <div class="row">
+            <input class="num" type="number" id="fans" min="1" step="1" value="12">
+            <input type="range" id="r-fans" min="1" max="200" step="1" value="12">
+          </div>
         </div>
+      </div>
 
-        <button onclick="calculate()">Calculate</button>
-        <div id="calcResult" class="result"></div>
+      <div class="actions">
+        <button class="ghost" id="preset-lean">Preset: Lean (10 × $2000)</button>
+        <button class="ghost" id="preset-premium">Preset: Premium (15 × $3000)</button>
+        <a class="btn dark" href="#calc" id="calcBtn">Calculate</a>
+      </div>
+
+      <div class="results">
+        <div class="result-card">
+          <div class="stat">
+            <span>Yearly subscription grind</span>
+            <span id="yearlySub">$24,000</span>
+          </div>
+          <div class="bar"><span id="barSub" style="width:0%"></span></div>
+        </div>
+        <div class="result-card">
+          <div class="stat">
+            <span>One Paradiiseo event potential</span>
+            <span id="eventEarn">$30,000</span>
+          </div>
+          <div class="bar"><span id="barEvt" style="width:0%"></span></div>
+          <div class="delta" id="deltaText">+ $6,000 vs. a whole year</div>
+          <p class="muted" id="eventsNeeded">≈ 1 event needed to match your yearly subscriptions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAFETY NET -->
+  <section>
+    <div class="wrap grid">
+      <div class="col-6 card reveal">
+        <h2 class="glass-title">Build Your Empire, On Your Terms</h2>
+        <p>Verified fans. Built-in refunds. Your permanent hub. Independence from social algorithms.</p>
+        <div class="img-hole">Safety feature visual</div>
+      </div>
+      <div class="col-6 card reveal">
+        <h2 class="glass-title">Own Your Brand</h2>
+        <p>Keep your identity and pricing power. Paradiiseo is your backstage, not another feed.</p>
+        <div class="img-hole">Branding visual</div>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section id="signup" class="glass-card" style="text-align:center; margin:3rem 10%;">
-    <h2>Be the Host, Not the Content Machine</h2>
-    <p>Ready to host your first experience? Join the waitlist for early access.</p>
-    <form>
-      <input type="email" placeholder="Your email" required 
-             style="padding:0.9rem; border-radius:50px; border:none; margin-right:0.5rem; width:220px;">
-      <button type="submit" class="btn">Join Waitlist</button>
-    </form>
+  <section id="cta">
+    <div class="wrap card reveal" style="text-align:center">
+      <h2 class="glass-title">Be the Host, Not the Content Machine</h2>
+      <p>Ready to host your first experience? Join the waitlist for early access.</p>
+      <form onsubmit="event.preventDefault(); this.reset(); alert('Welcome — you’re on the list!');" style="display:flex; gap:.7rem; justify-content:center; flex-wrap:wrap; margin-top:1rem">
+        <input type="email" required placeholder="Your email"
+               style="padding:1rem 1.1rem; border-radius:999px; border:1px solid var(--stroke); background:rgba(255,255,255,.1); color:#fff; width:min(340px,82vw); outline:none">
+        <button class="btn" type="submit">Join Waitlist</button>
+      </form>
+    </div>
   </section>
 
-  <footer>
-    © 2025 Paradisio. All rights reserved.
-  </footer>
+  <footer>© 2025 Paradiiseo. All rights reserved.</footer>
 
-  <script>
-    function updateLabel(inputId, labelId) {
-      document.getElementById(labelId).innerText = document.getElementById(inputId).value;
+<script>
+  /* ---------- Button ripple light-follow ---------- */
+  document.querySelectorAll('.btn').forEach(btn=>{
+    btn.addEventListener('pointermove', e=>{
+      const r = btn.getBoundingClientRect();
+      btn.style.setProperty('--x', (e.clientX - r.left)+'px');
+      btn.style.setProperty('--y', (e.clientY - r.top)+'px');
+    });
+  });
+
+  /* ---------- Scroll reveal animations ---------- */
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); }
+    });
+  }, {threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  /* ---------- Calculator bindings ---------- */
+  const bind = (numId, rangeId, badgeId) => {
+    const num=document.getElementById(numId), rng=document.getElementById(rangeId), badge=document.getElementById(badgeId);
+    const sync=(from,to)=>()=>{ to.value=from.value; badge.textContent=Number(from.value).toLocaleString(); animate(); }
+    num.addEventListener('input', sync(num,rng)); rng.addEventListener('input', sync(rng,num));
+  };
+  bind('monthly','r-monthly','v-monthly');
+  bind('price','r-price','v-price');
+  bind('fans','r-fans','v-fans');
+
+  const subEl = document.getElementById('yearlySub');
+  const evtEl = document.getElementById('eventEarn');
+  const barSub = document.getElementById('barSub');
+  const barEvt = document.getElementById('barEvt');
+  const deltaText = document.getElementById('deltaText');
+  const eventsNeeded = document.getElementById('eventsNeeded');
+
+  function calcValues(){
+    const monthly = +document.getElementById('monthly').value || 0;
+    const price   = +document.getElementById('price').value || 0;
+    const fans    = +document.getElementById('fans').value || 0;
+    return { yearlySub: monthly*12, oneEvent: price*fans };
+  }
+
+  function animate(){
+    const {yearlySub, oneEvent} = calcValues();
+    subEl.textContent = '$'+yearlySub.toLocaleString();
+    evtEl.textContent = '$'+oneEvent.toLocaleString();
+
+    const maxVal=Math.max(yearlySub, oneEvent, 1);
+    const subPct=Math.min(100,(yearlySub/maxVal)*100);
+    const evtPct=Math.min(100,(oneEvent/maxVal)*100);
+
+    requestAnimationFrame(()=>{
+      barSub.style.width=subPct+'%';
+      barEvt.style.width=evtPct+'%';
+    });
+
+    const delta = oneEvent - yearlySub;
+    const sign = delta>=0?'+':'–';
+    deltaText.textContent = `${sign} $${Math.abs(delta).toLocaleString()} vs. a whole year`;
+
+    if(oneEvent>0){
+      const need = Math.ceil((yearlySub||0)/oneEvent || 0);
+      eventsNeeded.textContent = yearlySub===0
+        ? `Even one event beats $0 yearly subscription income.`
+        : `≈ ${need} event${need>1?'s':''} needed to match your yearly subscriptions.`;
+    }else{
+      eventsNeeded.textContent = '';
     }
+  }
 
-    function calculate() {
-      const monthly = parseFloat(document.getElementById("monthlyIncome").value);
-      const ticketPrice = parseFloat(document.getElementById("eventPrice").value);
-      const fans = parseFloat(document.getElementById("fanCount").value);
+  document.getElementById('calcBtn').addEventListener('click', e=>{
+    e.preventDefault(); animate();
+    document.getElementById('calcBtn').classList.add('pulse');
+    setTimeout(()=>document.getElementById('calcBtn').classList.remove('pulse'),400);
+  });
 
-      const yearlySub = monthly * 12;
-      const eventEarnings = ticketPrice * fans;
+  document.getElementById('preset-lean').addEventListener('click', ()=>{
+    setVal('price','r-price','v-price',2000);
+    setVal('fans','r-fans','v-fans',10);
+    animate();
+  });
+  document.getElementById('preset-premium').addEventListener('click', ()=>{
+    setVal('price','r-price','v-price',3000);
+    setVal('fans','r-fans','v-fans',15);
+    animate();
+  });
+  function setVal(nId,rId,bId,val){ document.getElementById(nId).value=val; document.getElementById(rId).value=val; document.getElementById(bId).textContent=val.toLocaleString(); }
 
-      document.getElementById("calcResult").innerHTML = `
-        <p>💸 Yearly subscription grind: <strong>$${yearlySub.toLocaleString()}</strong></p>
-        <p>🚀 One Paradisio event could earn: <strong>$${eventEarnings.toLocaleString()}</strong></p>
-        <p>${eventEarnings > yearlySub 
-          ? "One event can surpass your yearly grind." 
-          : "Even a single event adds massive value alongside your current income."}</p>
-      `;
-    }
-  </script>
+  // Initial paint
+  animate();
+</script>
 </body>
 </html>
