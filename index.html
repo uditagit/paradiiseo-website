@@ -79,6 +79,9 @@
         .nav-link {
             position: relative;
             transition: all 0.3s ease;
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 500;
+            font-size: 1.05rem;
         }
         
         .nav-link:hover {
@@ -168,99 +171,143 @@
             z-index: 2;
         }
         
-        /* iPhone Mockups */
-      /* Simple Fade + Slide Carousel */
-.iphone-mockup {
-    width: 240px;
-    height: 495px;
-    background: #f5f5f7;
-    border-radius: 40px;
-    padding: 10px;
-    position: absolute;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e0e0e0;
-    transition: all 0.6s ease;
-    opacity: 0;
-    transform: translateX(100px);
-}
-
-.iphone-mockup.active {
-    opacity: 1;
-    transform: translateX(0);
-    z-index: 3;
-}
-
-.iphone-mockup.prev {
-    opacity: 0.6;
-    transform: translateX(-80px) scale(0.9);
-    z-index: 2;
-}
-
-.iphone-mockup.next {
-    opacity: 0.6;
-    transform: translateX(80px) scale(0.9);
-    z-index: 2;
-}
-
-.iphone-screen {
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    border-radius: 32px;
-    overflow: hidden;
-    position: relative;
-}
-
-.iphone-notch {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 140px;
-    height: 25px;
-    background: #f5f5f7;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
-    z-index: 10;
-}
-
-.mockup-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 32px;
-}
-
-.mockup-container {
-    position: relative;
-    width: 100%;
-    height: 600px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 2rem 0;
-}
-
-.carousel-controls {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.carousel-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(170, 90, 252, 0.3);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.carousel-dot.active {
-    background: #aa5afc;
-    transform: scale(1.2);
-}
+        /* Phone Carousel Styles */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        .phones-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 100%;
+        }
+        
+        .phone-mockup {
+            position: absolute;
+            width: 240px;
+            height: 485px;
+            background: #f5f5f7;
+            border-radius: 40px;
+            padding: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border: 1px solid #e0e0e0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 130px;
+            height: 22px;
+            background: #f5f5f7;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            z-index: 10;
+        }
+        
+        .phone-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 32px;
+        }
+        
+        .phone-mockup.active {
+            width: 260px;
+            height: 525px;
+            z-index: 3;
+            box-shadow: 0 20px 50px rgba(170, 90, 252, 0.3);
+            border-color: rgba(170, 90, 252, 0.4);
+            transform: translateX(0);
+        }
+        
+        .phone-mockup.left {
+            transform: translateX(-140px) scale(0.85);
+            opacity: 0.8;
+            z-index: 2;
+        }
+        
+        .phone-mockup.right {
+            transform: translateX(140px) scale(0.85);
+            opacity: 0.8;
+            z-index: 2;
+        }
+        
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(170, 90, 252, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-dot.active {
+            background: #aa5afc;
+            transform: scale(1.2);
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+        
+        .carousel-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(170, 90, 252, 0.2);
+        }
+        
+        .carousel-btn:hover {
+            background: white;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(170, 90, 252, 0.3);
+        }
+        
+        .carousel-btn i {
+            color: #8a3ad6;
+        }
         
         /* Progress Bar Styles */
         .progress-container {
@@ -733,7 +780,7 @@
         
         /* NEW: Alina name positioning */
         .alina-name {
-            text-align: left;
+            text-align: right;
             margin-top: 1.5rem;
         }
         
@@ -819,13 +866,7 @@
                 text-align: center;
             }
             
-            .mockup-container {
-                flex-direction: column;
-                gap: 1rem;
-                height: auto;
-            }
-            
-            .iphone-mockup {
+            .phone-mockup {
                 width: 200px !important;
                 height: 415px !important;
                 position: relative !important;
@@ -859,10 +900,7 @@
     <nav class="glass-effect fixed w-full z-50 py-4">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <div class="flex items-center space-x-2">
-                <div class="w-10 h-10 purple-gradient rounded-lg flex items-center justify-center">
-                    <span class="text-white font-bold text-xl">P</span>
-                </div>
-                <span class="text-xl font-bold gradient-text">PARADIISEO</span>
+                <img src="images/logo.png" alt="Paradiiseo Logo" class="h-10 w-auto">
             </div>
             
             <div class="hidden md:flex space-x-8">
@@ -898,28 +936,17 @@
                 
                 <!-- Right: Phone Carousel -->
                 <div class="md:w-1/2 relative">
-                    <div class="mockup-container">
-                        <div class="iphone-mockup side left" id="phone-left">
-                            <div class="iphone-notch"></div>
-                            <div class="iphone-screen">
-                                <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
-                                     alt="App Screen 1" class="mockup-image">
-                            </div>
+                    <div class="carousel-container">
+                        <div class="phones-row">
+                            <!-- Phones will be dynamically positioned here -->
                         </div>
                         
-                        <div class="iphone-mockup center" id="phone-center">
-                            <div class="iphone-notch"></div>
-                            <div class="iphone-screen">
-                                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
-                                     alt="App Screen 2" class="mockup-image">
+                        <div class="carousel-nav">
+                            <div class="carousel-btn prev-btn">
+                                <i class="fas fa-chevron-left"></i>
                             </div>
-                        </div>
-                        
-                        <div class="iphone-mockup side right" id="phone-right">
-                            <div class="iphone-notch"></div>
-                            <div class="iphone-screen">
-                                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
-                                     alt="App Screen 3" class="mockup-image">
+                            <div class="carousel-btn next-btn">
+                                <i class="fas fa-chevron-right"></i>
                             </div>
                         </div>
                     </div>
@@ -1003,10 +1030,6 @@
                          alt="Creator Alina" 
                          class="w-full h-auto object-cover" style="max-height: 500px;">
                 </div>
-                <!-- Alina name positioned on the left -->
-                <div class="alina-name">
-                    <span class="text-purple-600 font-semibold">Alina, 26 - Miami</span>
-                </div>
             </div>
             <div class="md:w-1/2">
                 <h2 class="text-3xl md:text-4xl font-bold mb-8 gradient-text">"I was creating content 24/7 but my fans wanted something real."</h2>
@@ -1015,6 +1038,10 @@
                     <p class="text-lg text-gray-700">
                         "Hi, I'm Alina. By day I create content for my subscribers. By night, I answer DMs from fans offering hundreds for a coffee, a dinner, a real connection. They don't want another clip in their inbox - they want to be part of my story. Paradiiseo helped me turn those DMs into $30,000 retreats where I control exactly who attends and how the experience unfolds."
                     </p>
+                </div>
+                <!-- Alina name positioned on the right -->
+                <div class="alina-name">
+                    <span class="text-purple-600 font-semibold">Alina, 26 - Miami</span>
                 </div>
             </div>
         </div>
@@ -1437,86 +1464,183 @@
     <!-- Footer -->
     <footer class="py-12 px-6 bg-gray-100">
         <div class="container mx-auto">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <div class="flex items-center space-x-2 mb-4">
-                        <div class="w-8 h-8 purple-gradient rounded-lg flex items-center justify-center">
-                            <span class="text-white font-bold">P</span>
-                        </div>
-                        <span class="text-xl font-bold gradient-text">PARADIISEO</span>
-                    </div>
-                    <p class="text-gray-600">Where creators become hosts and fans become part of the story.</p>
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <img src="images/logo.png" alt="Paradiiseo Logo" class="h-8 w-auto">
                 </div>
                 
-                <div>
-                    <h4 class="font-semibold mb-4">For Creators</h4>
-                    <ul class="space-y-2 text-gray-600">
-                        <li><a href="#" class="hover:text-purple-600 transition">Features</a></li>
-                        <li><a href="#" class="hover:text-purple-600 transition">Pricing</a></li>
-                        <li><a href="#" class="hover:text-purple-600 transition">Success Stories</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4">Resources</h4>
-                    <ul class="space-y-2 text-gray-600">
-                        <li><a href="#" class="hover:text-purple-600 transition">Help Center</a></li>
-                        <li><a href="#" class="hover:text-purple-600 transition">Safety & Trust</a></li>
-                        <li><a href="#" class="hover:text-purple-600 transition">Community</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4">Company</h4>
-                    <ul class="space-y-2 text-gray-600">
-                        <li><a href="#" class="hover:text-purple-600 transition">About</a></li>
-                        <li><a href="#" class="hover:text-purple-600 transition">Contact</a></li>
-                        <li><a href="#" class="hover:text-purple-600 transition">Privacy</a></li>
-                    </ul>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-600 hover:text-purple-600 transition">Terms & Conditions</a>
+                    <a href="#" class="text-gray-600 hover:text-purple-600 transition">Privacy Policy</a>
                 </div>
             </div>
             
             <div class="border-t border-gray-300 mt-8 pt-8 text-center text-gray-600">
-                <p>&copy; 2024 Paradiiseo. All rights reserved.</p>
+                <p>&copy; 2025 Paradiiseo. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Progress bar animation
-        const progressSection = document.getElementById('solution');
-        const progressFill = document.getElementById('progressFill');
-        const steps = [
-            document.getElementById('step1'),
-            document.getElementById('step2'),
-            document.getElementById('step3'),
-            document.getElementById('step4')
-        ];
-        
-        let animationPlayed = false;
-        
-        const progressObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !animationPlayed) {
-                    animationPlayed = true;
-                    
-                    // Animate progress bar
-                    progressFill.style.width = '100%';
-                    
-                    // Animate steps with delays
-                    steps.forEach((step, index) => {
-                        setTimeout(() => {
-                            step.classList.add('active');
-                        }, index * 600);
-                    });
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        progressObserver.observe(progressSection);
-
-        // Tab functionality for Alina's story
+        // Phone Carousel Functionality
         document.addEventListener('DOMContentLoaded', function() {
+            const phonesRow = document.querySelector('.phones-row');
+            const dots = document.querySelectorAll('.carousel-dot');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            
+            const images = [
+                "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            ];
+            
+            let currentIndex = 0;
+            let autoRotateInterval;
+            
+            // Create phone elements
+            function createPhones() {
+                phonesRow.innerHTML = '';
+                
+                for (let i = 0; i < images.length; i++) {
+                    const phone = document.createElement('div');
+                    phone.className = 'phone-mockup';
+                    phone.innerHTML = `
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <img src="${images[i]}" alt="App Screen ${i+1}" class="phone-image">
+                        </div>
+                    `;
+                    phonesRow.appendChild(phone);
+                }
+                
+                updatePhonePositions();
+            }
+            
+            // Update phone positions based on current index
+            function updatePhonePositions() {
+                const phones = document.querySelectorAll('.phone-mockup');
+                
+                phones.forEach((phone, index) => {
+                    phone.classList.remove('active', 'left', 'right');
+                    
+                    // Calculate position relative to current index
+                    const position = (index - currentIndex + images.length) % images.length;
+                    
+                    if (position === 0) {
+                        // Active phone (center)
+                        phone.classList.add('active');
+                    } else if (position === 1) {
+                        // Right phone
+                        phone.classList.add('right');
+                    } else {
+                        // Left phone
+                        phone.classList.add('left');
+                    }
+                });
+                
+                // Update dots
+                dots.forEach((dot, index) => {
+                    if (index === currentIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Next slide
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % images.length;
+                updatePhonePositions();
+            }
+            
+            // Previous slide
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                updatePhonePositions();
+            }
+            
+            // Initialize carousel
+            createPhones();
+            
+            // Dot click events
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const index = parseInt(dot.getAttribute('data-index'));
+                    currentIndex = index;
+                    updatePhonePositions();
+                    resetAutoRotate();
+                });
+            });
+            
+            // Button events
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoRotate();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoRotate();
+            });
+            
+            // Auto-rotate function
+            function startAutoRotate() {
+                autoRotateInterval = setInterval(nextSlide, 4000);
+            }
+            
+            function resetAutoRotate() {
+                clearInterval(autoRotateInterval);
+                startAutoRotate();
+            }
+            
+            // Start auto rotation
+            startAutoRotate();
+            
+            // Pause auto rotation on hover
+            const carouselContainer = document.querySelector('.carousel-container');
+            carouselContainer.addEventListener('mouseenter', () => {
+                clearInterval(autoRotateInterval);
+            });
+            
+            carouselContainer.addEventListener('mouseleave', () => {
+                startAutoRotate();
+            });
+            
+            // Progress bar animation
+            const progressSection = document.getElementById('solution');
+            const progressFill = document.getElementById('progressFill');
+            const steps = [
+                document.getElementById('step1'),
+                document.getElementById('step2'),
+                document.getElementById('step3'),
+                document.getElementById('step4')
+            ];
+            
+            let animationPlayed = false;
+            
+            const progressObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !animationPlayed) {
+                        animationPlayed = true;
+                        
+                        // Animate progress bar
+                        progressFill.style.width = '100%';
+                        
+                        // Animate steps with delays
+                        steps.forEach((step, index) => {
+                            setTimeout(() => {
+                                step.classList.add('active');
+                            }, index * 600);
+                        });
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            progressObserver.observe(progressSection);
+
+            // Tab functionality for Alina's story
             const tabs = document.querySelectorAll('.story-tab');
             const tabContents = document.querySelectorAll('.tab-content');
             const tabProgression = document.getElementById('tabProgression');
@@ -1551,98 +1675,20 @@
                 tabProgression.style.left = `${left}px`;
                 tabProgression.style.width = `${width}px`;
             }
-        });
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Phone Carousel Functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const mockups = [
-                document.getElementById('phone-left'),
-                document.getElementById('phone-center'), 
-                document.getElementById('phone-right')
-            ];
-            const dots = document.querySelectorAll('.carousel-dot');
-            let currentIndex = 1; // Start with center phone
-            
-            const images = [
-                "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-            ];
-            
-            function updateCarousel() {
-                // Update phone positions and sizes
-                mockups.forEach((mockup, index) => {
-                    // Reset all phones
-                    mockup.className = 'iphone-mockup';
-                    mockup.style.transform = '';
-                    mockup.style.zIndex = '';
-                    mockup.style.opacity = '';
-                    
-                    if (index === currentIndex) {
-                        // Center phone - larger and prominent
-                        mockup.classList.add('center');
-                        mockup.style.zIndex = '3';
-                        mockup.style.opacity = '1';
-                    } else {
-                        // Side phones - smaller and less prominent
-                        mockup.classList.add('side');
-                        mockup.style.zIndex = '2';
-                        mockup.style.opacity = '0.8';
-                        
-                        if (index === (currentIndex + 1) % 3) {
-                            mockup.classList.add('right');
-                            mockup.style.transform = 'translateX(40px)';
-                        } else {
-                            mockup.classList.add('left');
-                            mockup.style.transform = 'translateX(-40px)';
-                        }
-                    }
-                    
-                    // Update images
-                    const screenImg = mockup.querySelector('.mockup-image');
-                    screenImg.src = images[(index + currentIndex) % 3];
-                });
-                
-                // Update dots
-                dots.forEach((dot, index) => {
-                    if (index === currentIndex) {
-                        dot.classList.add('active');
-                    } else {
-                        dot.classList.remove('active');
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
                     }
                 });
-            }
-            
-            // Initialize carousel
-            updateCarousel();
-            
-            // Dot click events
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    currentIndex = index;
-                    updateCarousel();
-                });
             });
-            
-            // Auto-rotate carousel
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % 3;
-                updateCarousel();
-            }, 4000);
         });
     </script>
 </body>
