@@ -5,343 +5,1255 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paradiiseo - Stop Grinding. Start Hosting.</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Imports -->
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --purple-primary: #7e22ce;
-            --purple-secondary: #a855f7;
-            --purple-light: #faf5ff;
-            --purple-glossy: linear-gradient(135deg, rgba(126, 34, 206, 0.9), rgba(168, 85, 247, 0.9));
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
-        .purple-bg { background-color: var(--purple-primary); }
-        .light-purple-bg { 
-            background: var(--purple-light);
-            background-image: linear-gradient(135deg, rgba(126, 34, 206, 0.03) 0%, rgba(168, 85, 247, 0.03) 100%);
+        body {
+            font-family: 'Archivo', sans-serif;
+            font-weight: 500;
+            background: #fffdf6;
+            color: #333333;
+            overflow-x: hidden;
+            line-height: 1.6;
         }
-        .purple-gradient { background: linear-gradient(135deg, var(--purple-primary), var(--purple-secondary)); }
-        .purple-text { color: var(--purple-primary); }
+        
+        h1, h2, h3, h4, h5, h6, 
+        .font-heading {
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        
+        .purple-gradient {
+            background: linear-gradient(135deg, #aa5afc 0%, #8a3ad6 100%);
+        }
+        
+        .purple-bg {
+            background-color: #aa5afc;
+        }
+        
+        .light-purple-bg {
+            background-color: #f0e6ff;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(170, 90, 252, 0.2);
+            box-shadow: 0 8px 32px rgba(170, 90, 252, 0.1);
+        }
+        
         .gradient-text {
-            background: linear-gradient(135deg, var(--purple-primary), var(--purple-secondary), #c084fc);
+            background: linear-gradient(135deg, #8a3ad6, #aa5afc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% 200%;
+            animation: gradient-shift 3s ease infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .btn-glow {
+            box-shadow: 0 4px 15px rgba(170, 90, 252, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-glow:hover {
+            box-shadow: 0 6px 20px rgba(170, 90, 252, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        /* Navigation animations */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #aa5afc;
+            transform: translateY(-2px);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #aa5afc, #8a3ad6);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Problem cards color inversion */
+        .problem-card {
+            transition: all 0.5s ease;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(170, 90, 252, 0.1);
+        }
+        
+        .problem-card:hover {
+            background: linear-gradient(135deg, #aa5afc, #8a3ad6);
+            color: white;
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(170, 90, 252, 0.2);
+        }
+        
+        .problem-card:hover .card-icon {
+            background: white !important;
+        }
+        
+        .problem-card:hover .card-icon i {
+            background: linear-gradient(135deg, #aa5afc, #8a3ad6);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
+        
+        .problem-card:hover p {
+            color: rgba(255, 255, 255, 0.9) !important;
         }
         
-        /* Premium glossy background */
-        .glossy-purple-bg {
-            background: linear-gradient(135deg, var(--purple-primary) 0%, var(--purple-secondary) 100%);
+        /* Image shine effect on border */
+        .image-border-container {
+            position: relative;
+            border-radius: 1rem;
+            padding: 4px;
+            background: transparent;
+            overflow: hidden;
+        }
+        
+        .image-border-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.5) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: skewX(-25deg);
+            animation: shine 3s infinite;
+            z-index: 1;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 150%; }
+        }
+        
+        .image-border-container img {
+            border-radius: 0.9rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* iPhone Mockups */
+        .iphone-mockup {
+            background: #f5f5f7;
+            border-radius: 40px;
+            padding: 10px;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            transition: all 0.5s ease;
+        }
+        
+        .iphone-mockup.center {
+            width: 280px;
+            height: 580px;
+            z-index: 3;
+        }
+        
+        .iphone-mockup.side {
+            width: 220px;
+            height: 460px;
+            opacity: 0.8;
+            z-index: 2;
+        }
+        
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .iphone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 25px;
+            background: #f5f5f7;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            z-index: 10;
+        }
+        
+        .mockup-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 32px;
+        }
+        
+        .mockup-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            position: relative;
+            height: 600px;
+        }
+        
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(170, 90, 252, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-dot.active {
+            background: #aa5afc;
+            transform: scale(1.2);
+        }
+        
+        /* Progress Bar Styles */
+        .progress-container {
+            width: 100%;
+            margin: 3rem 0;
+        }
+        
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 4rem;
+        }
+        
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(170, 90, 252, 0.2);
+            transform: translateY(-50%);
+            z-index: 1;
+            border-radius: 2px;
+        }
+        
+        .progress-fill {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #aa5afc, #8a3ad6);
+            transform: translateY(-50%);
+            z-index: 2;
+            border-radius: 2px;
+            width: 0%;
+            transition: width 2s ease-in-out;
+        }
+        
+        .progress-step {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            flex: 1;
+            opacity: 0.6;
+            transition: all 0.5s ease;
+            padding: 0 1rem;
+        }
+        
+        .progress-step.active {
+            opacity: 1;
+        }
+        
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.2rem;
+            transition: all 0.4s ease;
+            color: #aa5afc;
+            border: 2px solid rgba(170, 90, 252, 0.2);
+        }
+        
+        .progress-step.active .step-icon {
+            color: #8a3ad6;
+            transform: scale(1.1);
+            border-color: #aa5afc;
+            background: rgba(170, 90, 252, 0.1);
+        }
+        
+        /* ENHANCED: Role cards with premium hover effects */
+        .role-card {
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            background: rgba(255, 255, 255, 0.9);
             position: relative;
             overflow: hidden;
         }
         
-        .glossy-purple-bg::before {
+        .role-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(170, 90, 252, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+        
+        .role-card:hover {
+            border-color: #aa5afc;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(170, 90, 252, 0.2);
+        }
+        
+        .role-card:hover::before {
+            left: 100%;
+        }
+        
+        /* ENHANCED: Premium Tabs Styling */
+        .story-tabs-container {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+        
+        .story-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            position: relative;
+        }
+        
+        .story-tab {
+            padding: 1.2rem 2rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(170, 90, 252, 0.2);
+            color: #666;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(170, 90, 252, 0.1);
+        }
+        
+        .story-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #aa5afc, #8a3ad6);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+        
+        .story-tab::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(170, 90, 252, 0.1), rgba(138, 58, 214, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        
+        .story-tab:hover {
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(170, 90, 252, 0.3);
+            border-color: rgba(170, 90, 252, 0.5);
+        }
+        
+        .story-tab:hover::before {
+            left: 0;
+        }
+        
+        .story-tab.active {
+            background: linear-gradient(135deg, #aa5afc, #8a3ad6);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(170, 90, 252, 0.4);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .story-tab.active::before {
+            left: 0;
+        }
+        
+        /* ENHANCED: Tab Content with Premium Styling */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.6s ease;
+            min-height: 500px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .phase-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #aa5afc, #8a3ad6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2rem;
+            box-shadow: 0 10px 30px rgba(170, 90, 252, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .phase-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .phase-icon:hover::after {
+            opacity: 1;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(170, 90, 252, 0.1), rgba(138, 58, 214, 0.1));
+            border: 1px solid rgba(170, 90, 252, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #aa5afc, #8a3ad6);
+        }
+        
+        /* ENHANCED: Premium Content Cards */
+        .premium-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            border: 1px solid rgba(170, 90, 252, 0.15);
+            box-shadow: 0 10px 40px rgba(170, 90, 252, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #aa5afc, #8a3ad6);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .premium-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .premium-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(170, 90, 252, 0.15);
+        }
+        
+        /* ENHANCED: Control Card - "You Control Who Attends" */
+        .control-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            border: 1px solid rgba(170, 90, 252, 0.15);
+            box-shadow: 0 15px 50px rgba(170, 90, 252, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .control-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(170, 90, 252, 0.05), transparent 50%);
+            z-index: 0;
+        }
+        
+        .control-card > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Benefit cards styling */
+        .benefit-card {
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #aa5afc, #8a3ad6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        /* Revenue Breakdown Styling */
+        .revenue-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .revenue-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid rgba(170, 90, 252, 0.15);
+            box-shadow: 0 8px 25px rgba(170, 90, 252, 0.08);
+        }
+        
+        .revenue-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .revenue-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(170, 90, 252, 0.1);
+        }
+        
+        .revenue-total {
+            background: linear-gradient(135deg, rgba(170, 90, 252, 0.1), rgba(138, 58, 214, 0.1));
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            border: 1px solid rgba(170, 90, 252, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .revenue-total::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(170, 90, 252, 0.1), transparent 70%);
+        }
+        
+        .path-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .path-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid rgba(170, 90, 252, 0.15);
+            box-shadow: 0 8px 25px rgba(170, 90, 252, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .path-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(170, 90, 252, 0.05), transparent 50%);
+            z-index: 0;
+        }
+        
+        .path-card > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .path-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(170, 90, 252, 0.3);
+            box-shadow: 0 15px 40px rgba(170, 90, 252, 0.15);
+        }
+        
+        .path-card.featured {
+            background: linear-gradient(135deg, rgba(170, 90, 252, 0.1), rgba(138, 58, 214, 0.1));
+            border: 2px solid rgba(170, 90, 252, 0.3);
+        }
+        
+        .cost-breakdown {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(170, 90, 252, 0.1);
+        }
+        
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(170, 90, 252, 0.1);
+        }
+        
+        /* NEW: Alina's card hover animation */
+        .alina-card {
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .alina-card:hover {
+            background: linear-gradient(135deg, #aa5afc, #8a3ad6);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(170, 90, 252, 0.3);
+        }
+        
+        .alina-card:hover::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.1) 0%, 
-                rgba(255, 255, 255, 0.05) 25%, 
-                rgba(255, 255, 255, 0.1) 50%, 
-                rgba(255, 255, 255, 0.05) 75%, 
-                rgba(255, 255, 255, 0.1) 100%);
-            pointer-events: none;
+            background: linear-gradient(135deg, #aa5afc, #8a3ad6);
+            z-index: -1;
+            animation: gradient-shift 2s ease infinite;
         }
         
-        /* Card hover animations */
-        .problem-card {
-            transition: all 0.3s ease;
-            transform: translateY(0);
+        /* NEW: Alina name positioning */
+        .alina-name {
+            text-align: left;
+            margin-top: 1.5rem;
         }
         
-        .problem-card:hover {
-            background-color: var(--purple-primary);
-            color: white;
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(126, 34, 206, 0.3);
+        /* NEW: Tab progression animation */
+        .tab-progression {
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #aa5afc, #8a3ad6);
+            border-radius: 2px;
+            transition: width 0.4s ease, left 0.4s ease;
+            z-index: 10;
         }
         
-        .problem-card:hover .purple-text,
-        .problem-card:hover .text-gray-600 {
+        /* NEW: Content cards for tabs */
+        .content-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid rgba(170, 90, 252, 0.15);
+            box-shadow: 0 8px 25px rgba(170, 90, 252, 0.08);
+            transition: all 0.4s ease;
+            height: 100%;
+            color: #333333;
+        }
+        
+        .content-card:hover {
+            background: linear-gradient(135deg, #aa5afc, #8a3ad6);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(170, 90, 252, 0.3);
+        }
+        
+        .content-card:hover * {
             color: white !important;
         }
         
-        /* Testimonial card animation */
-        @keyframes shinyBorder {
-            0% { box-shadow: 0 0 0 0 rgba(126, 34, 206, 0.4); }
-            50% { box-shadow: 0 0 0 10px rgba(126, 34, 206, 0.1); }
-            100% { box-shadow: 0 0 0 0 rgba(126, 34, 206, 0.4); }
+        .content-card:hover .text-gray-700,
+        .content-card:hover .text-gray-600,
+        .content-card:hover .text-gray-900 {
+            color: white !important;
         }
         
-        .testimonial-card {
-            animation: shinyBorder 3s ease-in-out infinite;
-            border: 1px solid rgba(126, 34, 206, 0.3);
+        .content-card:hover .text-green-500,
+        .content-card:hover .text-red-500,
+        .content-card:hover .text-purple-600 {
+            color: white !important;
         }
         
-        /* Progress bar steps */
-        .progress-step {
-            position: relative;
-            padding-left: 3rem;
+        .content-card:hover .highlight-box {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
         }
         
-        .progress-step::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 2rem;
-            height: 2rem;
-            background: var(--purple-primary);
-            border-radius: 50%;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
+        .content-card:hover .revenue-card {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
         }
         
-        .progress-step:nth-child(1)::before { content: '1'; }
-        .progress-step:nth-child(2)::before { content: '2'; }
-        .progress-step:nth-child(3)::before { content: '3'; }
-        .progress-step:nth-child(4)::before { content: '4'; }
-        
-        .progress-step:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            left: 1rem;
-            top: 2rem;
-            width: 2px;
-            height: 100%;
-            background: var(--purple-primary);
-            opacity: 0.3;
+        .content-card:hover .cost-breakdown {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
         }
         
-        /* Branching chart styles */
-        .branching-chart {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
+        .content-card:hover .revenue-total {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
         }
         
-        .chart-node {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin: 1rem 0;
-            position: relative;
-            z-index: 2;
-            transition: all 0.3s ease;
-        }
-        
-        .chart-node:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(126, 34, 206, 0.2);
-        }
-        
-        .chart-connectors {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 100%;
-            background: var(--purple-primary);
-            opacity: 0.3;
-            z-index: 1;
-        }
-        
-        .chart-branches {
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-            position: relative;
-        }
-        
-        .chart-branch {
-            position: relative;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .chart-branch::before {
-            content: '';
-            position: absolute;
-            top: -1rem;
-            width: 100%;
-            height: 2px;
-            background: var(--purple-primary);
-            opacity: 0.3;
-        }
-        
-        /* Receipt styling */
-        .receipt-design {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            border-left: 4px solid var(--purple-primary);
-            padding: 2rem;
-            font-family: 'Courier New', monospace;
-        }
-        
-        .receipt-line {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px dashed #e2e8f0;
-        }
-        
-        .receipt-total {
-            border-top: 2px solid var(--purple-primary);
-            font-weight: bold;
-            margin-top: 1rem;
-            padding-top: 1rem;
+        @media (max-width: 768px) {
+            .revenue-grid,
+            .path-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .story-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .story-tab {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .mockup-container {
+                flex-direction: column;
+                gap: 1rem;
+                height: auto;
+            }
+            
+            .iphone-mockup {
+                width: 280px !important;
+                height: 580px !important;
+                position: relative !important;
+                transform: none !important;
+                opacity: 1 !important;
+                margin: 1rem auto;
+            }
+            
+            .premium-card,
+            .control-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .alina-name {
+                text-align: center;
+            }
+            
+            .hero-split {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
         }
     </style>
 </head>
-<body class="font-['Inter'] bg-white text-gray-900">
+<body class="min-h-screen">
     <!-- Navigation -->
-    <nav class="glass-effect fixed w-full z-50 py-4 shadow-sm">
+    <nav class="glass-effect fixed w-full z-50 py-4">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <div class="w-10 h-10 purple-gradient rounded-lg flex items-center justify-center">
                     <span class="text-white font-bold text-xl">P</span>
                 </div>
-                <span class="text-xl font-bold purple-text">PARADIISEO</span>
+                <span class="text-xl font-bold gradient-text">PARADIISEO</span>
             </div>
             
             <div class="hidden md:flex space-x-8">
-                <a href="#problem" class="text-gray-600 hover:purple-text transition">The Problem</a>
-                <a href="#solution" class="text-gray-600 hover:purple-text transition">The Solution</a>
-                <a href="#collaboration" class="text-gray-600 hover:purple-text transition">Collaboration</a>
-                <a href="#waitlist" class="text-gray-600 hover:purple-text transition">Join Waitlist</a>
+                <a href="#problem" class="nav-link text-gray-700">The Problem</a>
+                <a href="#solution" class="nav-link text-gray-700">The Solution</a>
+                <a href="#alina-story" class="nav-link text-gray-700">Success Story</a>
+                <a href="#collaboration" class="nav-link text-gray-700">Collaboration</a>
+                <a href="#waitlist" class="nav-link text-gray-700">Join Waitlist</a>
             </div>
             
             <div class="flex space-x-4">
-                <button class="px-6 py-2 purple-gradient text-white rounded-full btn-glow font-medium">Join Waitlist</button>
+                <button class="px-6 py-2 purple-gradient text-white rounded-full btn-glow">Join Waitlist</button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section - Restructured -->
-    <section class="min-h-screen flex items-center pt-20 pb-10 px-6 light-purple-bg">
-        <div class="container mx-auto flex flex-col md:flex-row items-center">
-            <!-- Left Side - Text Content -->
-            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
-                <h1 class="text-5xl md:text-7xl font-bold mb-4">
-                    <div>Stop Grinding.</div>
-                    <div><span class="gradient-text">Start Hosting.</span></div>
-                </h1>
-                <p class="text-xl md:text-2xl text-gray-600 mb-8">
-                    Turn your most dedicated fans into lifelong patrons with exclusive, real-world experiences. Paradiiseo gives you the tools to create premium events that earn more than months of subscription churn.
-                </p>
-                <button class="px-8 py-3 purple-gradient text-white rounded-full text-lg font-semibold btn-glow">
-                    Join the Waitlist for Early Access
-                </button>
-            </div>
-            
-            <!-- Right Side - Image -->
-            <div class="md:w-1/2 flex justify-center">
-                <div class="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl w-full h-96 flex items-center justify-center shadow-lg">
-                    <span class="text-gray-500 text-lg">Premium Experience Image</span>
+    <!-- Hero Section with Split Screen -->
+    <section class="min-h-screen flex items-center pt-20 pb-10 px-6 purple-gradient">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row items-center hero-split">
+                <!-- Left: Text Content -->
+                <div class="md:w-1/2 hero-text">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white">Platforms Change.<br><span class="text-white">Experiences Last.</span></h1>
+                    <p class="text-lg md:text-xl text-white/90 mb-8 max-w-xl">
+                        Turn your most dedicated fans into lifelong patrons with exclusive, real-world experiences. Paradiiseo gives you the tools to create premium events that earn more than months of subscription churn.
+                    </p>
+                    <div class="mb-8">
+                        <button class="px-8 py-3 bg-white text-purple-600 rounded-full text-lg font-semibold btn-glow">
+                            Join the Waitlist for Early Access
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Right: Phone Carousel -->
+                <div class="md:w-1/2 relative">
+                    <div class="mockup-container">
+                        <div class="iphone-mockup side left" id="phone-left">
+                            <div class="iphone-notch"></div>
+                            <div class="iphone-screen">
+                                <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                                     alt="App Screen 1" class="mockup-image">
+                            </div>
+                        </div>
+                        
+                        <div class="iphone-mockup center" id="phone-center">
+                            <div class="iphone-notch"></div>
+                            <div class="iphone-screen">
+                                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                                     alt="App Screen 2" class="mockup-image">
+                            </div>
+                        </div>
+                        
+                        <div class="iphone-mockup side right" id="phone-right">
+                            <div class="iphone-notch"></div>
+                            <div class="iphone-screen">
+                                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                                     alt="App Screen 3" class="mockup-image">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-controls">
+                        <div class="carousel-dot active" data-index="0"></div>
+                        <div class="carousel-dot" data-index="1"></div>
+                        <div class="carousel-dot" data-index="2"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- The Problem Section -->
-    <section id="problem" class="py-20 px-6 glossy-purple-bg relative">
-        <div class="container mx-auto relative z-10">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-white">The Creator Economy is Broken.</h2>
-            <h3 class="text-3xl md:text-4xl font-bold text-center mb-16 text-white opacity-90">You Feel It Every Day.</h3>
+    <section id="problem" class="py-20 px-6 bg-white">
+        <div class="container mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">The Creator Economy is Broken. <span class="gradient-text">You Feel It Every Day.</span></h2>
+            <p class="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
+                You're stuck creating endless content just to maintain relevance. Your time is spent managing leaks, chasing brand deals, and worrying about platform algorithms.
+            </p>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <!-- Problem Cards with Hover Effects -->
-                <div class="problem-card bg-white rounded-2xl p-6 text-center shadow-lg border border-gray-100">
-                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="problem-card rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4 card-icon">
                         <i class="fas fa-sync-alt text-2xl text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 purple-text">The Endless Grind</h3>
+                    <h3 class="text-xl font-bold mb-2">The Endless Grind</h3>
                     <p class="text-gray-600">Non-stop content creation just to stay relevant</p>
                 </div>
                 
-                <div class="problem-card bg-white rounded-2xl p-6 text-center shadow-lg border border-gray-100">
-                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="problem-card rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4 card-icon">
                         <i class="fas fa-users text-2xl text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 purple-text">Shallow Exclusivity</h3>
+                    <h3 class="text-xl font-bold mb-2">Shallow Exclusivity</h3>
                     <p class="text-gray-600">"Exclusive" content that thousands can access</p>
                 </div>
                 
-                <div class="problem-card bg-white rounded-2xl p-6 text-center shadow-lg border border-gray-100">
-                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="problem-card rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4 card-icon">
                         <i class="fas fa-exclamation-triangle text-2xl text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 purple-text">Leak Nightmare</h3>
+                    <h3 class="text-xl font-bold mb-2">Leak Nightmare</h3>
                     <p class="text-gray-600">Constant rebranding and lost identity</p>
                 </div>
                 
-                <div class="problem-card bg-white rounded-2xl p-6 text-center shadow-lg border border-gray-100">
-                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="problem-card rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4 card-icon">
                         <i class="fas fa-table text-2xl text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 purple-text">Messy Collaborations</h3>
+                    <h3 class="text-xl font-bold mb-2">Messy Collaborations</h3>
                     <p class="text-gray-600">Spreadsheet drama and payment arguments</p>
                 </div>
                 
-                <div class="problem-card bg-white rounded-2xl p-6 text-center shadow-lg border border-gray-100">
-                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="problem-card rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4 card-icon">
                         <i class="fas fa-ban text-2xl text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 purple-text">Platform Anxiety</h3>
+                    <h3 class="text-xl font-bold mb-2">Platform Anxiety</h3>
                     <p class="text-gray-600">One algorithm change away from losing everything</p>
                 </div>
                 
-                <div class="problem-card bg-white rounded-2xl p-6 text-center shadow-lg border border-gray-100">
-                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="problem-card rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4 card-icon">
                         <i class="fas fa-chart-line text-2xl text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 purple-text">Revenue Ceiling</h3>
+                    <h3 class="text-xl font-bold mb-2">Revenue Ceiling</h3>
                     <p class="text-gray-600">Stuck selling access for pocket change</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Creator Story Section - Restructured -->
+    <!-- Creator Story Section - 50/50 Split -->
     <section class="py-20 px-6 light-purple-bg">
-        <div class="container mx-auto max-w-6xl">
-            <div class="flex flex-col md:flex-row items-center gap-10">
-                <!-- Left Side - Vertical Image -->
-                <div class="md:w-2/5">
-                    <div class="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl w-full h-96 flex items-center justify-center">
-                        <span class="text-gray-500 text-lg">Alina's Photo</span>
+        <div class="container mx-auto flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                <div class="image-border-container">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Creator Alina" 
+                         class="w-full h-auto object-cover" style="max-height: 500px;">
+                </div>
+                <!-- Alina name positioned on the left -->
+                <div class="alina-name">
+                    <span class="text-purple-600 font-semibold">Alina, 26 - Miami</span>
+                </div>
+            </div>
+            <div class="md:w-1/2">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 gradient-text">"I was creating content 24/7 but my fans wanted something real."</h2>
+                <!-- Alina card with hover animation -->
+                <div class="alina-card glass-effect rounded-2xl p-8 md:p-10">
+                    <p class="text-lg text-gray-700">
+                        "Hi, I'm Alina. By day I create content for my subscribers. By night, I answer DMs from fans offering hundreds for a coffee, a dinner, a real connection. They don't want another clip in their inbox - they want to be part of my story. Paradiiseo helped me turn those DMs into $30,000 retreats where I control exactly who attends and how the experience unfolds."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alina's Story Section - Premium Tabs -->
+    <section id="alina-story" class="py-20 px-6 bg-white">
+        <div class="container mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">From Digital Content to <span class="gradient-text">Real Revenue</span></h2>
+            <p class="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+                Here's how it happens when creators take control
+            </p>
+
+            <!-- ENHANCED: Premium Tab Navigation -->
+            <div class="story-tabs-container">
+                <div class="story-tabs">
+                    <div class="tab-progression" id="tabProgression"></div>
+                    <button class="story-tab active" data-tab="phase1">
+                        <i class="fas fa-bolt mr-2"></i>Current Reality
+                    </button>
+                    <button class="story-tab" data-tab="phase2">
+                        <i class="fas fa-road mr-2"></i>New Model
+                    </button>
+                    <button class="story-tab" data-tab="phase3">
+                        <i class="fas fa-calculator mr-2"></i>Execution
+                    </button>
+                    <button class="story-tab" data-tab="phase4">
+                        <i class="fas fa-trophy mr-2"></i>Outcome
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Content Container -->
+            <div class="min-h-[600px]">
+                <!-- Tab 1: Current Reality -->
+                <div class="tab-content active" id="phase1">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="content-card">
+                            <h4 class="font-bold text-xl mb-4 text-purple-600">The Content Grind</h4>
+                            <p class="text-gray-700 mb-4">"After years of creating endless content from my bedroom, I realized my most engaged fans wanted genuine connection, not just another piece of content. They were offering hundreds of dollars in my DMs just for coffee meetings."</p>
+                            <p class="text-gray-700">"That's when I knew: instead of churning out more digital content, I could create real-world experiences that delivered the connection they craved - while building a sustainable business."</p>
+                        </div>
+                        
+                        <div class="content-card">
+                            <h4 class="font-bold text-xl mb-4 text-purple-600">The Pivot from Content to Experiences</h4>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <i class="fas fa-times text-red-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">Before: Creating 5 pieces of daily content, chasing algorithms</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">After: Hosting 4 transformative retreats per year, building real community</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Right Side - Content -->
-                <div class="md:w-3/5">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-6 gradient-text">"I was creating content 24/7 but my fans wanted something real."</h2>
-                    
-                    <div class="testimonial-card bg-white rounded-2xl p-8 shadow-lg mb-4">
-                        <p class="text-lg text-gray-700 leading-relaxed">
-                            "Hi, I'm Alina. By day I create content for my subscribers. By night, I answer DMs from fans offering hundreds for a coffee, a dinner, a real connection. They don't want another clip in their inbox - they want to be part of my story. Paradiiseo helped me turn those DMs into $30,000 retreats where I control exactly who attends and how the experience unfolds."
-                        </p>
+
+                <!-- Tab 2: New Model -->
+                <div class="tab-content" id="phase2">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Path A: Solo -->
+                        <div class="content-card">
+                            <h4 class="text-2xl font-bold mb-4 text-center text-gray-600">Path A: The Solo Creator Route</h4>
+                            <p class="text-gray-600 mb-6 text-center">"I could have continued the safe path of solo hosting..."</p>
+                            
+                            <div class="revenue-card mb-6">
+                                <div class="revenue-item">
+                                    <span class="text-gray-700">20 participants × $3,000</span>
+                                    <span class="text-gray-900 font-semibold">$60,000</span>
+                                </div>
+                                <div class="revenue-item">
+                                    <span class="text-gray-700">My Share</span>
+                                    <span class="text-green-600 font-semibold">100% = $60,000</span>
+                                </div>
+                                <div class="revenue-item">
+                                    <span class="text-gray-700">Event Costs</span>
+                                    <span class="text-red-500 font-semibold">$25,000</span>
+                                </div>
+                                <div class="revenue-item font-bold text-lg">
+                                    <span class="text-gray-900">My Profit</span>
+                                    <span class="text-green-600">$35,000</span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">$35,000 cash</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-times text-red-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">I handle everything</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-times text-red-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">Limited content variety</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-times text-red-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">Same audience, same reach</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Path B: Collaborative -->
+                        <div class="content-card">
+                            <h4 class="text-2xl font-bold mb-4 text-center gradient-text">Path B: Strategic Amplification</h4>
+                            <p class="text-gray-700 mb-6 text-center">"Instead, I chose to amplify my impact through collaboration..."</p>
+                            
+                            <div class="revenue-card mb-6">
+                                <div class="revenue-item">
+                                    <span class="text-gray-700">20 participants × $5,000</span>
+                                    <span class="text-gray-900 font-semibold">$100,000</span>
+                                </div>
+                                <div class="revenue-item">
+                                    <span class="text-gray-700">My Share</span>
+                                    <span class="text-green-600 font-semibold">60% = $60,000</span>
+                                </div>
+                                <div class="revenue-item">
+                                    <span class="text-gray-700">Event Costs</span>
+                                    <span class="text-red-500 font-semibold">$30,000</span>
+                                </div>
+                                <div class="revenue-item font-bold text-lg">
+                                    <span class="text-gray-900">My Profit</span>
+                                    <span class="text-green-600">$30,000</span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">$30,000 cash + exponential growth</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">3 experts elevating my experience</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">Cross-promotion to 730K+ new followers</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">6 months of diverse, premium content</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Execution -->
+                <div class="tab-content" id="phase3">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Automatic Distribution -->
+                        <div class="content-card">
+                            <h4 class="text-xl font-bold mb-6 text-center gradient-text">Automatic Distribution from Ticket Sales</h4>
+                            <div class="space-y-4">
+                                <div class="revenue-item">
+                                    <span class="text-gray-700">Total Ticket Sales</span>
+                                    <span class="text-gray-900 font-semibold">$100,000</span>
+                                </div>
+                                <div class="revenue-item">
+                                    <span class="text-gray-700">My Share (Host)</span>
+                                    <span class="text-green-600 font-semibold">60% = $60,000</span>
+                                </div>
+                                <div class="revenue-item">
+                                    <span class="text-gray-700">3 Headliners (10% each)</span>
+                                    <span class="text-purple-600 font-semibold">30% = $30,000</span>
+                                </div>
+                                <div class="revenue-item">
+                                    <span class="text-gray-700">Co-host</span>
+                                    <span class="text-purple-600 font-semibold">5% = $5,000</span>
+                                </div>
+                                <div class="revenue-item">
+                                    <span class="text-gray-700">Crew (4 people)</span>
+                                    <span class="text-purple-600 font-semibold">5% = $5,000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Event Costs -->
+                        <div class="content-card">
+                            <h4 class="text-xl font-bold mb-6 text-center gradient-text">From My $60,000, Cover Event Costs</h4>
+                            <div class="cost-breakdown">
+                                <div class="cost-item">
+                                    <span class="text-gray-700">Luxury Villa Rental</span>
+                                    <span class="text-red-500">$12,000</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span class="text-gray-700">Food & Beverages</span>
+                                    <span class="text-red-500">$8,000</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span class="text-gray-700">Equipment & Materials</span>
+                                    <span class="text-red-500">$3,500</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span class="text-gray-700">Transportation</span>
+                                    <span class="text-red-500">$1,500</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span class="text-gray-700">Marketing</span>
+                                    <span class="text-red-500">$2,000</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span class="text-gray-700">Contingency</span>
+                                    <span class="text-red-500">$3,000</span>
+                                </div>
+                                <div class="cost-item font-bold mt-2">
+                                    <span class="text-gray-900">Total Costs</span>
+                                    <span class="text-red-500">$30,000</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="text-right">
-                        <span class="text-purple-600 font-semibold text-lg">Alina, 26 - Miami</span>
+                    <div class="content-card mt-8">
+                        <div class="revenue-total">
+                            <div class="text-4xl font-bold gradient-text mb-2">$30,000</div>
+                            <p class="text-xl text-gray-700">My Net Profit</p>
+                            <p class="text-gray-600 mt-2">For 3 days of meaningful work vs months of content grinding</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 4: Outcome -->
+                <div class="tab-content" id="phase4">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="content-card">
+                            <h4 class="font-bold text-xl mb-3 text-purple-600">Content Goldmine</h4>
+                            <p class="text-gray-700">"Generated 6 months of premium content from one weekend. Stunning photos and videos that attracted new followers and premium brand partnerships."</p>
+                        </div>
+                        
+                        <div class="content-card">
+                            <h4 class="font-bold text-xl mb-3 text-purple-600">Community Built</h4>
+                            <p class="text-gray-700">"Created 20 superfans who now promote me organically and have become my biggest advocates, driving more qualified attendees to future retreats."</p>
+                        </div>
+                        
+                        <div class="content-card">
+                            <h4 class="font-bold text-xl mb-3 text-purple-600">Brand Partnerships</h4>
+                            <p class="text-gray-700">"Landed 3 new sponsorship deals from the retreat content, adding another $15,000 in revenue without any extra work."</p>
+                        </div>
+                        
+                        <div class="content-card">
+                            <h4 class="font-bold text-xl mb-3 gradient-text">Freedom Achieved</h4>
+                            <p class="text-gray-700">"Reduced daily content creation by 60% while doubling my income. Now I host sold-out retreats every quarter as my main income source, working from paradise locations instead of my bedroom."</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -349,37 +1261,52 @@
     </section>
 
     <!-- The Solution Section -->
-    <section id="solution" class="py-20 px-6 bg-white">
+    <section id="solution" class="py-20 px-6 light-purple-bg">
         <div class="container mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">Host Premium Experiences.</h2>
-            <h3 class="text-3xl md:text-4xl font-bold text-center mb-8 gradient-text">Make Fans Part of Your Story.</h3>
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">Host Premium Experiences. <span class="gradient-text">Make Fans Part of Your Story.</span></h2>
             <p class="text-xl text-gray-600 text-center mb-8 max-w-3xl mx-auto">
                 Paradiiseo is the first platform built for creators to design, host, and monetize real-world experiences.
             </p>
             
-            <div class="bg-white rounded-2xl p-8 max-w-4xl mx-auto mt-12 shadow-lg border border-gray-100">
-                <h3 class="text-2xl font-bold mb-6 text-center gradient-text">You Control Who Attends</h3>
-                <p class="text-gray-600 text-center mb-8">
+            <!-- ENHANCED: Control Card -->
+            <div class="control-card max-w-6xl mx-auto mt-12">
+                <h3 class="text-2xl font-bold mb-4 text-center gradient-text">You Control Who Attends</h3>
+                <p class="text-gray-700 text-center mb-6 max-w-3xl mx-auto">
                     Vet every participant, set your standards, and ensure the experience matches your vision. No more random audiences - only the fans who truly appreciate your work.
                 </p>
                 
-                <!-- Progress Bar Steps -->
-                <div class="space-y-6">
-                    <div class="progress-step">
-                        <h4 class="font-semibold text-gray-800 mb-2">Application Review</h4>
-                        <p class="text-gray-600">Vet every potential attendee before they can purchase</p>
-                    </div>
-                    <div class="progress-step">
-                        <h4 class="font-semibold text-gray-800 mb-2">Custom Criteria</h4>
-                        <p class="text-gray-600">Set requirements that match your brand values</p>
-                    </div>
-                    <div class="progress-step">
-                        <h4 class="font-semibold text-gray-800 mb-2">Final Approval Power</h4>
-                        <p class="text-gray-600">No one joins without your explicit approval</p>
-                    </div>
-                    <div class="progress-step">
-                        <h4 class="font-semibold text-gray-800 mb-2">Conduct Standards</h4>
-                        <p class="text-gray-600">Enforce rules that ensure everyone's comfort and safety</p>
+                <!-- Horizontal Progress Bar -->
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                        <div class="progress-step" id="step1">
+                            <div class="step-icon">
+                                <i class="fas fa-user-check"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg">Application Review</h4>
+                            <p class="text-gray-600 mt-2">Vet every potential attendee before they can purchase</p>
+                        </div>
+                        <div class="progress-step" id="step2">
+                            <div class="step-icon">
+                                <i class="fas fa-sliders-h"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg">Custom Criteria</h4>
+                            <p class="text-gray-600 mt-2">Set requirements that match your brand values</p>
+                        </div>
+                        <div class="progress-step" id="step3">
+                            <div class="step-icon">
+                                <i class="fas fa-gavel"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg">Final Approval Power</h4>
+                            <p class="text-gray-600 mt-2">No one joins without your explicit approval</p>
+                        </div>
+                        <div class="progress-step" id="step4">
+                            <div class="step-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h4 class="font-semibold text-lg">Conduct Standards</h4>
+                            <p class="text-gray-600 mt-2">Enforce rules that ensure everyone's comfort and safety</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -387,194 +1314,118 @@
     </section>
 
     <!-- Collaboration Engine Section -->
-    <section id="collaboration" class="py-20 px-6 light-purple-bg">
+    <section id="collaboration" class="py-20 px-6 purple-gradient">
         <div class="container mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">The End of <span class="gradient-text">Spreadsheet Drama</span></h2>
-            <p class="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-white">The End of <span class="text-white">Spreadsheet Drama</span></h2>
+            <p class="text-xl text-white/90 text-center mb-16 max-w-3xl mx-auto">
                 Our system understands how creative collaborations actually work. Bring together the perfect team and let Paradiiseo handle the clean money splits automatically.
             </p>
             
-            <!-- Branching Chart -->
-            <div class="branching-chart max-w-4xl mx-auto mb-16">
-                <div class="chart-connectors"></div>
-                
-                <!-- Host Level -->
-                <div class="chart-node">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="role-card glass-effect rounded-2xl p-6 text-center">
                     <div class="w-20 h-20 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-crown text-2xl text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 purple-text text-center">HOST</h3>
-                    <p class="text-gray-600 text-center text-sm">You set the vision, rules, and have final approval</p>
+                    <h3 class="text-xl font-bold mb-2">HOST</h3>
+                    <p class="text-gray-700">You set the vision, rules, and have final approval on everything</p>
                 </div>
                 
-                <!-- Co-host Level -->
-                <div class="chart-node">
+                <div class="role-card glass-effect rounded-2xl p-6 text-center">
                     <div class="w-20 h-20 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-handshake text-2xl text-white"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 purple-text text-center">CO-HOST</h3>
-                    <p class="text-gray-600 text-center text-sm">Your trusted partner in managing the experience</p>
+                    <h3 class="text-xl font-bold mb-2">CO-HOST</h3>
+                    <p class="text-gray-700">Your trusted partner in managing the experience</p>
                 </div>
                 
-                <!-- Branch Level -->
-                <div class="chart-branches mt-8">
-                    <div class="chart-branch">
-                        <div class="chart-node">
-                            <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-2">
-                                <i class="fas fa-star text-xl text-white"></i>
-                            </div>
-                            <h4 class="font-bold purple-text text-center">HEADLINERS</h4>
-                            <p class="text-gray-600 text-center text-xs">Featured creators</p>
-                        </div>
+                <div class="role-card glass-effect rounded-2xl p-6 text-center">
+                    <div class="w-20 h-20 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-star text-2xl text-white"></i>
                     </div>
-                    
-                    <div class="chart-branch">
-                        <div class="chart-node">
-                            <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-2">
-                                <i class="fas fa-video text-xl text-white"></i>
-                            </div>
-                            <h4 class="font-bold purple-text text-center">CREW</h4>
-                            <p class="text-gray-600 text-center text-xs">Professionals</p>
-                        </div>
-                    </div>
-                    
-                    <div class="chart-branch">
-                        <div class="chart-node">
-                            <div class="w-16 h-16 purple-gradient rounded-full flex items-center justify-center mx-auto mb-2">
-                                <i class="fas fa-users text-xl text-white"></i>
-                            </div>
-                            <h4 class="font-bold purple-text text-center">PARTICIPANTS</h4>
-                            <p class="text-gray-600 text-center text-xs">Vetted superfans</p>
-                        </div>
-                    </div>
+                    <h3 class="text-xl font-bold mb-2">HEADLINERS</h3>
+                    <p class="text-gray-700">Featured creators who bring their audience to your event</p>
                 </div>
-            </div>
-            
-            <!-- Miami Retreat Example - Receipt Design -->
-            <div class="bg-white rounded-2xl p-8 max-w-4xl mx-auto shadow-lg border border-gray-100">
-                <h3 class="text-2xl font-bold mb-6 text-center gradient-text">The Miami Retreat: How $30,000 Happens</h3>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <!-- Left Side - Receipt Design -->
-                    <div class="receipt-design rounded-lg">
-                        <h4 class="font-bold text-lg mb-4 text-center purple-text">REVENUE SPLIT RECEIPT</h4>
-                        <div class="receipt-line">
-                            <span>10 participants × $3,000</span>
-                            <span class="font-bold">$30,000</span>
-                        </div>
-                        <div class="receipt-line">
-                            <span>HOST (40%)</span>
-                            <span>$12,000</span>
-                        </div>
-                        <div class="receipt-line">
-                            <span>HEADLINER (25%)</span>
-                            <span>$7,500</span>
-                        </div>
-                        <div class="receipt-line">
-                            <span>CO-HOST (15%)</span>
-                            <span>$4,500</span>
-                        </div>
-                        <div class="receipt-line">
-                            <span>CREW (10%)</span>
-                            <span>$3,000</span>
-                        </div>
-                        <div class="receipt-line">
-                            <span>PLATFORM FEE (10%)</span>
-                            <span>$3,000</span>
-                        </div>
-                        <div class="receipt-total">
-                            <span>TOTAL DISTRIBUTED</span>
-                            <span class="purple-text">$30,000</span>
-                        </div>
+                
+                <div class="role-card glass-effect rounded-2xl p-6 text-center">
+                    <div class="w-20 h-20 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-video text-2xl text-white"></i>
                     </div>
-                    
-                    <!-- Right Side - Benefits -->
-                    <div>
-                        <h4 class="font-semibold mb-4 text-gray-800 text-lg">What You Get:</h4>
-                        <ul class="space-y-3">
-                            <li class="flex items-center p-3 bg-purple-50 rounded-lg">
-                                <i class="fas fa-check text-green-500 mr-3 text-lg"></i>
-                                <span>$12,000 for one weekend</span>
-                            </li>
-                            <li class="flex items-center p-3 bg-purple-50 rounded-lg">
-                                <i class="fas fa-check text-green-500 mr-3 text-lg"></i>
-                                <span>Viral content in exotic locations</span>
-                            </li>
-                            <li class="flex items-center p-3 bg-purple-50 rounded-lg">
-                                <i class="fas fa-check text-green-500 mr-3 text-lg"></i>
-                                <span>Expanded reach to new audiences</span>
-                            </li>
-                            <li class="flex items-center p-3 bg-purple-50 rounded-lg">
-                                <i class="fas fa-check text-green-500 mr-3 text-lg"></i>
-                                <span>No payment chasing - automatic splits</span>
-                            </li>
-                            <li class="flex items-center p-3 bg-purple-50 rounded-lg">
-                                <i class="fas fa-check text-green-500 mr-3 text-lg"></i>
-                                <span>Complete control over the experience</span>
-                            </li>
-                        </ul>
+                    <h3 class="text-xl font-bold mb-2">CREW</h3>
+                    <p class="text-gray-700">Professionals paid automatically from ticket sales</p>
+                </div>
+                
+                <div class="role-card glass-effect rounded-2xl p-6 text-center">
+                    <div class="w-20 h-20 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-dollar-sign text-2xl text-white"></i>
                     </div>
+                    <h3 class="text-xl font-bold mb-2">SPONSORS</h3>
+                    <p class="text-gray-700">Brands and sponsors who fund experiences in exchange for premium placement</p>
+                </div>
+                
+                <div class="role-card glass-effect rounded-2xl p-6 text-center">
+                    <div class="w-20 h-20 purple-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">PARTICIPANTS</h3>
+                    <p class="text-gray-700">Your vetted superfans who become part of your story</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Final CTA Section -->
-    <section id="waitlist" class="py-20 px-6 glossy-purple-bg relative">
-        <div class="container mx-auto text-center relative z-10">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">Ready to Host Your First Experience?</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto text-white opacity-90">
+    <section id="waitlist" class="py-20 px-6 bg-white">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Ready to Host Your First Experience?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto text-gray-600">
                 Join creators who are designing their exit from the subscription grind. Be the first to access Paradiiseo when we launch.
             </p>
             
-            <div class="max-w-md mx-auto mb-12">
+            <div class="max-w-md mx-auto">
                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-full text-gray-900 border-0 focus:outline-none focus:ring-2 focus:ring-white">
-                    <button class="px-8 py-3 bg-white text-purple-600 rounded-full font-semibold hover:bg-gray-100 transition whitespace-nowrap">
+                    <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-full border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <button class="px-8 py-3 purple-gradient text-white rounded-full font-semibold btn-glow whitespace-nowrap">
                         Join Waitlist
                     </button>
                 </div>
-                <p class="text-sm mt-4 text-white opacity-75">Join 5,000+ creators on the waitlist</p>
+                <p class="text-sm mt-4 text-gray-500">Join 5,000+ creators on the waitlist</p>
             </div>
             
-            <!-- Benefits Grid -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
-                <div class="bg-white bg-opacity-10 rounded-xl p-6 backdrop-blur-sm">
-                    <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fas fa-earlybirds text-white text-xl"></i>
+            <div class="grid md:grid-cols-4 gap-8 max-w-4xl mx-auto mt-12">
+                <div class="benefit-card text-center">
+                    <div class="benefit-icon">
+                        <i class="fas fa-rocket text-white"></i>
                     </div>
-                    <h4 class="font-bold text-white mb-2">Early Access</h4>
-                    <p class="text-white text-opacity-80 text-sm">Be among the first to use the platform</p>
+                    <p class="font-semibold text-lg">Early Access</p>
+                    <p class="text-gray-600 text-sm mt-2">Be among the first to experience Paradiiseo</p>
                 </div>
-                
-                <div class="bg-white bg-opacity-10 rounded-xl p-6 backdrop-blur-sm">
-                    <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fas fa-eye text-white text-xl"></i>
+                <div class="benefit-card text-center">
+                    <div class="benefit-icon">
+                        <i class="fas fa-eye text-white"></i>
                     </div>
-                    <h4 class="font-bold text-white mb-2">First Look</h4>
-                    <p class="text-white text-opacity-80 text-sm">Preview new features before anyone else</p>
+                    <p class="font-semibold text-lg">First Look</p>
+                    <p class="text-gray-600 text-sm mt-2">Preview features before public release</p>
                 </div>
-                
-                <div class="bg-white bg-opacity-10 rounded-xl p-6 backdrop-blur-sm">
-                    <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fas fa-hands-helping text-white text-xl"></i>
+                <div class="benefit-card text-center">
+                    <div class="benefit-icon">
+                        <i class="fas fa-headset text-white"></i>
                     </div>
-                    <h4 class="font-bold text-white mb-2">Onboarding Support</h4>
-                    <p class="text-white text-opacity-80 text-sm">Personalized guidance to get started</p>
+                    <p class="font-semibold text-lg">Onboarding Support</p>
+                    <p class="text-gray-600 text-sm mt-2">Personal guidance to get you started</p>
                 </div>
-                
-                <div class="bg-white bg-opacity-10 rounded-xl p-6 backdrop-blur-sm">
-                    <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fas fa-star text-white text-xl"></i>
+                <div class="benefit-card text-center">
+                    <div class="benefit-icon">
+                        <i class="fas fa-star text-white"></i>
                     </div>
-                    <h4 class="font-bold text-white mb-2">Priority Access</h4>
-                    <p class="text-white text-opacity-80 text-sm">Jump the queue for premium features</p>
+                    <p class="font-semibold text-lg">Priority Access</p>
+                    <p class="text-gray-600 text-sm mt-2">Skip the line when we fully launch</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-6 bg-gray-50 border-t">
+    <footer class="py-12 px-6 bg-gray-100">
         <div class="container mx-auto">
             <div class="grid md:grid-cols-4 gap-8">
                 <div>
@@ -582,60 +1433,206 @@
                         <div class="w-8 h-8 purple-gradient rounded-lg flex items-center justify-center">
                             <span class="text-white font-bold">P</span>
                         </div>
-                        <span class="text-xl font-bold purple-text">PARADIISEO</span>
+                        <span class="text-xl font-bold gradient-text">PARADIISEO</span>
                     </div>
                     <p class="text-gray-600">Where creators become hosts and fans become part of the story.</p>
                 </div>
                 
                 <div>
-                    <h4 class="font-semibold mb-4 text-gray-800">For Creators</h4>
+                    <h4 class="font-semibold mb-4">For Creators</h4>
                     <ul class="space-y-2 text-gray-600">
-                        <li><a href="#" class="hover:purple-text transition">Features</a></li>
-                        <li><a href="#" class="hover:purple-text transition">Pricing</a></li>
-                        <li><a href="#" class="hover:purple-text transition">Success Stories</a></li>
+                        <li><a href="#" class="hover:text-purple-600 transition">Features</a></li>
+                        <li><a href="#" class="hover:text-purple-600 transition">Pricing</a></li>
+                        <li><a href="#" class="hover:text-purple-600 transition">Success Stories</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="font-semibold mb-4 text-gray-800">Resources</h4>
+                    <h4 class="font-semibold mb-4">Resources</h4>
                     <ul class="space-y-2 text-gray-600">
-                        <li><a href="#" class="hover:purple-text transition">Help Center</a></li>
-                        <li><a href="#" class="hover:purple-text transition">Safety & Trust</a></li>
-                        <li><a href="#" class="hover:purple-text transition">Community</a></li>
+                        <li><a href="#" class="hover:text-purple-600 transition">Help Center</a></li>
+                        <li><a href="#" class="hover:text-purple-600 transition">Safety & Trust</a></li>
+                        <li><a href="#" class="hover:text-purple-600 transition">Community</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="font-semibold mb-4 text-gray-800">Company</h4>
+                    <h4 class="font-semibold mb-4">Company</h4>
                     <ul class="space-y-2 text-gray-600">
-                        <li><a href="#" class="hover:purple-text transition">About</a></li>
-                        <li><a href="#" class="hover:purple-text transition">Contact</a></li>
-                        <li><a href="#" class="hover:purple-text transition">Privacy</a></li>
+                        <li><a href="#" class="hover:text-purple-600 transition">About</a></li>
+                        <li><a href="#" class="hover:text-purple-600 transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-purple-600 transition">Privacy</a></li>
                     </ul>
                 </div>
             </div>
             
-            <div class="border-t border-gray-200 mt-8 pt-8 text-center text-gray-600">
+            <div class="border-t border-gray-300 mt-8 pt-8 text-center text-gray-600">
                 <p>&copy; 2024 Paradiiseo. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Add smooth scrolling for navigation links
+        // Progress bar animation
+        const progressSection = document.getElementById('solution');
+        const progressFill = document.getElementById('progressFill');
+        const steps = [
+            document.getElementById('step1'),
+            document.getElementById('step2'),
+            document.getElementById('step3'),
+            document.getElementById('step4')
+        ];
+        
+        let animationPlayed = false;
+        
+        const progressObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !animationPlayed) {
+                    animationPlayed = true;
+                    
+                    // Animate progress bar
+                    progressFill.style.width = '100%';
+                    
+                    // Animate steps with delays
+                    steps.forEach((step, index) => {
+                        setTimeout(() => {
+                            step.classList.add('active');
+                        }, index * 600);
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        progressObserver.observe(progressSection);
+
+        // Tab functionality for Alina's story
         document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
+            const tabs = document.querySelectorAll('.story-tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabProgression = document.getElementById('tabProgression');
+            
+            // Initialize tab progression
+            updateTabProgression(tabs[0]);
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetTab = tab.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    tab.classList.add('active');
+                    document.getElementById(targetTab).classList.add('active');
+                    
+                    // Update tab progression
+                    updateTabProgression(tab);
                 });
             });
+            
+            function updateTabProgression(activeTab) {
+                const tabRect = activeTab.getBoundingClientRect();
+                const containerRect = activeTab.parentElement.getBoundingClientRect();
+                
+                const left = tabRect.left - containerRect.left;
+                const width = tabRect.width;
+                
+                tabProgression.style.left = `${left}px`;
+                tabProgression.style.width = `${width}px`;
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Phone Carousel Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mockups = [
+                document.getElementById('phone-left'),
+                document.getElementById('phone-center'), 
+                document.getElementById('phone-right')
+            ];
+            const dots = document.querySelectorAll('.carousel-dot');
+            let currentIndex = 1; // Start with center phone
+            
+            const images = [
+                "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            ];
+            
+            function updateCarousel() {
+                // Update phone positions and sizes
+                mockups.forEach((mockup, index) => {
+                    // Reset all phones
+                    mockup.className = 'iphone-mockup';
+                    mockup.style.transform = '';
+                    mockup.style.zIndex = '';
+                    mockup.style.opacity = '';
+                    
+                    if (index === currentIndex) {
+                        // Center phone - larger and prominent
+                        mockup.classList.add('center');
+                        mockup.style.zIndex = '3';
+                        mockup.style.opacity = '1';
+                    } else {
+                        // Side phones - smaller and less prominent
+                        mockup.classList.add('side');
+                        mockup.style.zIndex = '2';
+                        mockup.style.opacity = '0.8';
+                        
+                        if (index === (currentIndex + 1) % 3) {
+                            mockup.classList.add('right');
+                            mockup.style.transform = 'translateX(40px)';
+                        } else {
+                            mockup.classList.add('left');
+                            mockup.style.transform = 'translateX(-40px)';
+                        }
+                    }
+                    
+                    // Update images
+                    const screenImg = mockup.querySelector('.mockup-image');
+                    screenImg.src = images[(index + currentIndex) % 3];
+                });
+                
+                // Update dots
+                dots.forEach((dot, index) => {
+                    if (index === currentIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Initialize carousel
+            updateCarousel();
+            
+            // Dot click events
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateCarousel();
+                });
+            });
+            
+            // Auto-rotate carousel
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % 3;
+                updateCarousel();
+            }, 4000);
         });
     </script>
 </body>
