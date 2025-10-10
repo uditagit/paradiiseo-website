@@ -5,6 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paradiiseo - Own Your Platform.</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyALrVjrbwNq3tsErB2xDptF3LnE-Tp8M3k",
+            authDomain: "paradiiseo-11a2e.firebaseapp.com",
+            projectId: "paradiiseo-11a2e",
+            storageBucket: "paradiiseo-11a2e.firebasestorage.app",
+            messagingSenderId: "1007203452601",
+            appId: "1:1007203452601:web:4d9fe1d5c7c597229dbd68",
+            measurementId: "G-VSYJRZSR6C"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        window.firebaseApp = app;
+        window.firebaseDb = db;
+        window.addDoc = addDoc;
+        window.collection = collection;
+        window.serverTimestamp = serverTimestamp;
+    </script>
     <!-- Font Imports -->
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
@@ -1143,7 +1167,7 @@
                 padding-left: 60px !important;
             }
             
-            /* Vertical connecting line */
+            /* Vertical connecting line - hidden on mobile */
             .progress-bar::before {
                 content: '' !important;
                 position: absolute !important;
@@ -1151,21 +1175,21 @@
                 top: 20px !important;
                 bottom: 20px !important;
                 width: 4px !important;
-                background: rgba(170, 90, 252, 0.2) !important;
+                background: transparent !important;
                 border-radius: 2px !important;
                 z-index: 1 !important;
             }
             
-            /* Mobile progress fill - vertical */
+            /* Mobile progress fill - hidden */
             .progress-fill {
                 position: absolute !important;
                 left: 30px !important;
                 top: 20px !important;
                 width: 4px !important;
-                background: linear-gradient(180deg, #aa5afc, #8a3ad6) !important;
+                background: transparent !important;
                 border-radius: 2px !important;
                 z-index: 2 !important;
-                height: 0% !important;
+                height: 100% !important;
                 transition: height 2s ease-in-out !important;
             }
             
@@ -1174,7 +1198,7 @@
                 position: relative !important;
                 z-index: 3 !important;
                 text-align: left !important;
-                opacity: 0.6 !important;
+                opacity: 1 !important;
                 transition: all 0.5s ease !important;
                 padding: 1rem 0 !important;
                 margin-bottom: 2rem !important;
@@ -1195,15 +1219,16 @@
                 top: 0 !important;
                 width: 40px !important;
                 height: 40px !important;
-                background: rgba(170, 90, 252, 0.1) !important;
-                border: 3px solid rgba(170, 90, 252, 0.2) !important;
+                background: linear-gradient(135deg, #aa5afc, #8a3ad6) !important;
+                border: 3px solid #aa5afc !important;
                 border-radius: 50% !important;
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
                 font-size: 1rem !important;
-                color: #aa5afc !important;
+                color: white !important;
                 transition: all 0.5s ease !important;
+                transform: scale(1.1) !important;
             }
             
             .progress-step.active .step-icon {
@@ -1470,11 +1495,151 @@
                 height: 44px;
             }
             
-            .carousel-dot {
-                width: 16px;
-                height: 16px;
-            }
+        .carousel-dot {
+            width: 16px;
+            height: 16px;
         }
+    }
+    
+    /* Waitlist Form Styles */
+    .waitlist-form {
+        position: relative;
+    }
+    
+    .form-message {
+        position: absolute;
+        top: -60px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 1rem 2rem;
+        border-radius: 0.75rem;
+        font-weight: 600;
+        text-align: center;
+        min-width: 300px;
+        z-index: 10;
+        animation: slideDown 0.3s ease-out;
+    }
+    
+    .form-message.success {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+    }
+    
+    .form-message.success::before {
+        content: '🎉';
+        margin-right: 8px;
+        font-size: 1.2em;
+        animation: bounce 0.6s ease-in-out;
+    }
+    
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-10px);
+        }
+        60% {
+            transform: translateY(-5px);
+        }
+    }
+    
+    .form-message.error {
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+        color: white;
+        box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3);
+    }
+    
+    .form-message.loading {
+        background: linear-gradient(135deg, #aa5afc, #8a3ad6);
+        color: white;
+        box-shadow: 0 8px 25px rgba(170, 90, 252, 0.3);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+    }
+    
+    .form-message.loading::after {
+        content: '';
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 2px solid transparent;
+        border-top: 2px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-left: 8px;
+        vertical-align: middle;
+    }
+    
+    .form-message.success::after {
+        display: none;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    }
+    
+    .form-input {
+        transition: all 0.3s ease;
+    }
+    
+    .form-input:focus {
+        border-color: #aa5afc;
+        box-shadow: 0 0 0 3px rgba(170, 90, 252, 0.1);
+    }
+    
+    .form-input.error {
+        border-color: #ef4444;
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+    }
+    
+    .form-button {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .form-button:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+    
+    .form-button.loading {
+        pointer-events: none;
+    }
+    
+    .form-button.loading {
+        color: transparent;
+    }
+    
+    .form-button.loading::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 20px;
+        height: 20px;
+        border: 2px solid transparent;
+        border-top: 2px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
         
         @media (max-width: 320px) {
             .container {
@@ -1651,14 +1816,14 @@
             
             <div class="hidden md:flex space-x-8">
                 <a href="#problem" class="nav-link text-gray-700">The Problem</a>
-                <a href="#solution" class="nav-link text-gray-700">The Solution</a>
-                <a href="#alina-story" class="nav-link text-gray-700">Success Story</a>
+                <a href="#alina-story" class="nav-link text-gray-700">The Solution</a>
+                <a href="#alina-creator" class="nav-link text-gray-700">Success Story</a>
                 <a href="#collaboration" class="nav-link text-gray-700">Collaboration</a>
                 <a href="#waitlist" class="nav-link text-gray-700">Join Waitlist</a>
             </div>
             
             <div class="flex space-x-4 items-center">
-                <button class="hidden md:block px-6 py-2 purple-gradient text-white rounded-full btn-glow">Join Waitlist</button>
+                <button class="hidden md:block px-6 py-2 purple-gradient text-white rounded-full btn-glow" onclick="scrollToWaitlist()">Join Waitlist</button>
                 <button class="md:hidden p-2 text-gray-700 hover:text-purple-600 transition-colors" id="mobile-menu-btn">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
@@ -1669,11 +1834,11 @@
         <div class="md:hidden bg-white/95 backdrop-blur-lg border-t border-purple-100 hidden" id="mobile-menu">
             <div class="container mx-auto px-6 py-4 space-y-4">
                 <a href="#problem" class="block py-2 text-gray-700 hover:text-purple-600 transition-colors">The Problem</a>
-                <a href="#solution" class="block py-2 text-gray-700 hover:text-purple-600 transition-colors">The Solution</a>
-                <a href="#alina-story" class="block py-2 text-gray-700 hover:text-purple-600 transition-colors">Success Story</a>
+                <a href="#alina-story" class="block py-2 text-gray-700 hover:text-purple-600 transition-colors">The Solution</a>
+                <a href="#alina-creator" class="block py-2 text-gray-700 hover:text-purple-600 transition-colors">Success Story</a>
                 <a href="#collaboration" class="block py-2 text-gray-700 hover:text-purple-600 transition-colors">Collaboration</a>
                 <a href="#waitlist" class="block py-2 text-gray-700 hover:text-purple-600 transition-colors">Join Waitlist</a>
-                <button class="w-full mt-4 px-6 py-3 purple-gradient text-white rounded-full btn-glow">Join Waitlist</button>
+                <button class="w-full mt-4 px-6 py-3 purple-gradient text-white rounded-full btn-glow" onclick="scrollToWaitlist()">Join Waitlist</button>
             </div>
         </div>
     </nav>
@@ -1689,7 +1854,7 @@
                         Turn your most dedicated fans into lifelong patrons with exclusive, real-world experiences. Paradiiseo gives you the tools to create premium events that earn more than months of subscription churn.
                     </p>
                     <div class="mb-8">
-                        <button class="px-8 py-3 bg-white text-purple-600 rounded-full text-lg font-semibold btn-glow">
+                        <button class="px-8 py-3 bg-white text-purple-600 rounded-full text-lg font-semibold btn-glow" onclick="scrollToWaitlist()">
                             Join the Waitlist for Early Access
                         </button>
                     </div>
@@ -1784,13 +1949,13 @@
     </section>
 
     <!-- Creator Story Section - 50/50 Split -->
-    <section class="py-20 px-6 light-purple-bg">
+    <section id="alina-creator" class="py-20 px-6 light-purple-bg">
         <div class="container mx-auto flex flex-col md:flex-row items-center">
             <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
                 <div class="image-border-container">
                     <img src="./images/004.png" 
                          alt="Creator Alina" 
-                         class="w-full h-auto object-cover rounded-2xl" 
+                         class="w-full h-auto object-cover object-top rounded-2xl" 
                          style="max-height: 500px; min-height: 400px;">
                 </div>
             </div>
@@ -2181,13 +2346,25 @@
                 Join creators who are designing their exit from the subscription grind. Be the first to access Paradiiseo when we launch.
             </p>
             
-            <div class="max-w-md mx-auto">
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-full border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-500">
-                    <button class="px-8 py-3 purple-gradient text-white rounded-full font-semibold btn-glow whitespace-nowrap">
+            <div class="max-w-md mx-auto waitlist-form">
+                <div id="form-message" class="form-message hidden"></div>
+                <form id="waitlist-form" class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <input 
+                        type="email" 
+                        id="email-input"
+                        placeholder="Enter your email" 
+                        class="form-input flex-1 px-4 py-3 rounded-full border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        required
+                        autocomplete="email"
+                    >
+                    <button 
+                        type="submit"
+                        id="submit-button"
+                        class="form-button px-8 py-3 purple-gradient text-white rounded-full font-semibold btn-glow whitespace-nowrap"
+                    >
                         Join Waitlist
                     </button>
-                </div>
+                </form>
                 <p class="text-sm mt-4 text-gray-500">Join 5,000+ creators on the waitlist</p>
             </div>
             
@@ -2285,9 +2462,9 @@
             const nextBtn = document.querySelector('.next-btn');
             
             const images = [
-                "images/carousel1.svg",
+                "images/mockup1.jpg",
                 "images/carousel2.svg", 
-                "images/carousel3.svg"
+                "images/splash.jpg"
             ];
             
             let currentIndex = 0;
@@ -2519,54 +2696,182 @@
             });
         });
         
-        // Mobile progress animation - vertical version
-        function initMobileProgressAnimation() {
+        // Mobile progress - make all steps always active
+        function initMobileProgress() {
             if (window.innerWidth <= 768) {
                 const progressFill = document.getElementById('progressFill');
                 const progressSteps = document.querySelectorAll('.progress-step');
                 
-                // Animate progress fill vertically
-                let currentStep = 0;
-                const totalSteps = progressSteps.length;
-                
-                function updateProgress() {
-                    const progressPercentage = (currentStep / (totalSteps - 1)) * 100;
-                    if (progressFill) {
-                        progressFill.style.height = progressPercentage + '%';
-                    }
-                    
-                    // Update active states
-                    progressSteps.forEach((step, index) => {
-                        if (index <= currentStep) {
-                            step.classList.add('active');
-                        } else {
-                            step.classList.remove('active');
-                        }
-                    });
+                // Set mobile progress bar to full height
+                if (progressFill) {
+                    progressFill.style.height = '100%';
                 }
                 
-                // Auto-advance progress
-                const interval = setInterval(() => {
-                    currentStep++;
-                    if (currentStep >= totalSteps) {
-                        currentStep = 0;
-                    }
-                    updateProgress();
-                }, 2000);
-                
-                // Manual step control on touch
-                progressSteps.forEach((step, index) => {
-                    step.addEventListener('click', () => {
-                        currentStep = index;
-                        updateProgress();
-                    });
+                // Make all steps active immediately
+                progressSteps.forEach(step => {
+                    step.classList.add('active');
                 });
             }
         }
         
         // Initialize on load and resize
-        document.addEventListener('DOMContentLoaded', initMobileProgressAnimation);
-        window.addEventListener('resize', initMobileProgressAnimation);
+        document.addEventListener('DOMContentLoaded', initMobileProgress);
+        window.addEventListener('resize', initMobileProgress);
+        
+        // Waitlist Form Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const waitlistForm = document.getElementById('waitlist-form');
+            const emailInput = document.getElementById('email-input');
+            const submitButton = document.getElementById('submit-button');
+            const formMessage = document.getElementById('form-message');
+            
+            if (!waitlistForm || !emailInput || !submitButton || !formMessage) {
+                console.error('Waitlist form elements not found');
+                return;
+            }
+            
+            // Email validation function
+            function validateEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+            
+            // Show message function
+            function showMessage(message, type) {
+                formMessage.textContent = message;
+                formMessage.className = `form-message ${type}`;
+                formMessage.classList.remove('hidden');
+                
+                // Auto-hide after 5 seconds for success/error messages
+                if (type === 'success' || type === 'error') {
+                    setTimeout(() => {
+                        formMessage.classList.add('hidden');
+                    }, 5000);
+                }
+            }
+            
+            // Hide message function
+            function hideMessage() {
+                formMessage.classList.add('hidden');
+            }
+            
+            // Clear message function
+            function clearMessage() {
+                formMessage.classList.add('hidden');
+                emailInput.classList.remove('error');
+            }
+            
+            // Form submission handler
+            waitlistForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const email = emailInput.value.trim();
+                
+                // Hide any previous messages
+                hideMessage();
+                
+                // Validate email
+                if (!email) {
+                    showMessage('Please enter your email address', 'error');
+                    emailInput.classList.add('error');
+                    emailInput.focus();
+                    return;
+                }
+                
+                if (!validateEmail(email)) {
+                    showMessage('Please enter a valid email address', 'error');
+                    emailInput.classList.add('error');
+                    emailInput.focus();
+                    return;
+                }
+                
+                // Show loading state only after validation passes
+                submitButton.classList.add('loading');
+                submitButton.disabled = true;
+                submitButton.textContent = 'Joining...';
+                
+                try {
+                    // Check if Firebase is available
+                    if (!window.firebaseDb || !window.addDoc || !window.collection || !window.serverTimestamp) {
+                        throw new Error('Firebase not initialized');
+                    }
+                    
+                    // Add to Firestore
+                    const docRef = await window.addDoc(window.collection(window.firebaseDb, 'waitlist'), {
+                        email: email,
+                        timestamp: window.serverTimestamp(),
+                        source: 'website',
+                        userAgent: navigator.userAgent,
+                        referrer: document.referrer || 'direct'
+                    });
+                    
+                    console.log('Document written with ID: ', docRef.id);
+                    
+                    // Success message
+                    showMessage('Welcome to the waitlist! You\'ll be the first to know when we launch.', 'success');
+                    
+                    // Reset form
+                    emailInput.value = '';
+                    
+                } catch (error) {
+                    console.error('Error adding to waitlist:', error);
+                    
+                    // Show error message
+                    let errorMessage = 'Something went wrong. Please try again.';
+                    
+                    if (error.code === 'permission-denied') {
+                        errorMessage = 'Unable to join waitlist. Please contact support.';
+                    } else if (error.code === 'unavailable') {
+                        errorMessage = 'Service temporarily unavailable. Please try again later.';
+                    } else if (error.message.includes('Firebase not initialized')) {
+                        errorMessage = 'Service not available. Please refresh the page and try again.';
+                    }
+                    
+                    showMessage(errorMessage, 'error');
+                } finally {
+                    // Reset button state
+                    submitButton.classList.remove('loading');
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Join Waitlist';
+                }
+            });
+            
+            // Clear error state when user starts typing
+            emailInput.addEventListener('input', function() {
+                if (this.classList.contains('error')) {
+                    this.classList.remove('error');
+                    hideMessage();
+                }
+            });
+            
+            // Handle Enter key in email input
+            emailInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    waitlistForm.dispatchEvent(new Event('submit'));
+                }
+            });
+        });
+        
+        // Scroll to waitlist function
+        function scrollToWaitlist() {
+            const waitlistSection = document.getElementById('waitlist');
+            const emailInput = document.getElementById('email-input');
+            
+            if (waitlistSection) {
+                waitlistSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Focus on email input after scrolling
+                setTimeout(() => {
+                    if (emailInput) {
+                        emailInput.focus();
+                    }
+                }, 500);
+            }
+        }
     </script>
 </body>
 </html>
